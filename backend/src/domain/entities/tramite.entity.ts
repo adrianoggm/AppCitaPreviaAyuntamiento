@@ -21,7 +21,6 @@ export class Tramite {
         public fechaFin: Date,
         public idusuario: string,
         public codigo: string,
-        public tipo: string,
         public tipoTramite: string, //CAMBIAR POR ENUM
         public documentos: string[],
         public observaciones: string
