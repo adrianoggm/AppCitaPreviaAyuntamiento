@@ -11,6 +11,8 @@ import { MongooseModule } from '@nestjs/mongoose';
       rootPath: join(__dirname, '..', 'frontend'), 
       exclude: ['/apo/*'] //excluyo las rutas de api
     }),
+
+    MongooseModule.forRoot('mongodb://localhost/tu_base_de_datos'),
   ],
   controllers: [AppController],
   providers: [AppService],
