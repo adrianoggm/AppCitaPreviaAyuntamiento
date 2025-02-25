@@ -21,9 +21,10 @@ export const TramiteSchema = new Schema({
     fechaInicio: {type: Date, required: true}, //Reutilizo el time Stamp ? 
     fechaFin: {type: Date},   //OJO 
 
-    usuario: {type: String, required: true},
+    idusuario: {type: String, required: true},
     codigo: {type: String, required: true}, 
     tipo: {type: String},   //IGUAL HAY QUE CAMBIARLIO 
+    idtecnico: { type: String, required: true },
     documentos: {type: [String]},
     observaciones: {type: String}  
 

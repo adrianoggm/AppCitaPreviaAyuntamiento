@@ -5,6 +5,7 @@ import { Tramite } from '../../domain/entities/tramite.entity';
 import { ITramiteRepository } from '../../domain/interfaces/tramite-repository.interface';
 import { CreateTramiteDto } from '../adapters/controllers/tramite/dto/create-tramite.dto';
 
+
 @Injectable()
 export class TramiteRepository implements ITramiteRepository {
     constructor(@InjectModel('Tramite') private readonly tramiteModel: Model<Tramite>) {}

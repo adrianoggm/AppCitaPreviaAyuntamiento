@@ -57,4 +57,8 @@ export class CreateTramiteDto {
     @IsOptional()
     @IsString({each: true}) //buscar como hacer que cada uno sea un string
     readonly documentos?: string[];
+
+    @IsOptional()
+    @IsString()
+    idtecnico?: string;
 }
