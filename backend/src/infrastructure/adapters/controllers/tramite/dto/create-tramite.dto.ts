@@ -4,7 +4,8 @@ import {
     IsNotEmpty,
     IsString,
     IsOptional,
-    IsDate
+    IsDate,
+    IsDateString
 } from 'class-validator';
 // Igual si se ponen enums hay que actualizar 
 /*
@@ -30,12 +31,12 @@ export class CreateTramiteDto {
     estado: string;
 
     @IsNotEmpty()
-    @IsDate()
-    readonly fechaInicio: Date;
+    @IsDateString()
+    readonly fechaInicio: string;
 
     @IsOptional()
-    @IsDate()
-    fechaFin: Date;
+    @IsDateString()
+    fechaFin: string;
 
     @IsNotEmpty()
     @IsString()

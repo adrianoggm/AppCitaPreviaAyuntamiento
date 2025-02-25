@@ -4,16 +4,18 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import {ServeStaticModule} from '@nestjs/serve-static';
 import { MongooseModule } from '@nestjs/mongoose';
-
+import { TramiteModule } from './infrastructure/adapters/controllers/tramite/tramite.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'frontend'), 
-      exclude: ['/apo/*'] //excluyo las rutas de api
+      //exclude: ['/api/(.*)'], //excluyo las rutas de api
     }),
-
-    MongooseModule.forRoot('mongodb://localhost/tu_base_de_datos'),
+    TramiteModule,
+    MongooseModule.forRoot('mongodb+srv://aggm000edu:1@aytocitaprevia.ulfz9.mongodb.net/?retryWrites=true&w=majority&appName=AytoCitaprevia'),
+    
   ],
+  
   controllers: [AppController],
   providers: [AppService],
 })
