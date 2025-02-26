@@ -30,3 +30,9 @@ export const TramiteSchema = new Schema({
 
 
 });
+
+// Crea una propiedad virtual "id" que devuelve el _id en formato string
+TramiteSchema.virtual('id').get(function() {
+    return this._id.toHexString();
+  });
+TramiteSchema.set('toJSON', { virtuals: true });

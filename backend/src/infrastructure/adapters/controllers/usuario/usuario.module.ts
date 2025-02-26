@@ -8,7 +8,7 @@ import { UsuarioRepository  } from '../../../persistence/usuario.repository';
 
 @Module({
     imports: [
-      MongooseModule.forFeature([{ name:'Tramite',schema: UsuarioSchema }]),
+      MongooseModule.forFeature([{ name:'Usuario',schema: UsuarioSchema }]),
     ],
     controllers: [UsuarioController],
     providers: [CreateUsuarioUseCase ,
@@ -17,4 +17,4 @@ import { UsuarioRepository  } from '../../../persistence/usuario.repository';
         useClass: UsuarioRepository,
     },],
 })
-export class TramiteModule {}
+export class UsuarioModule {}
