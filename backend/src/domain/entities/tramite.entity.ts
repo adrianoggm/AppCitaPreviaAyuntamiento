@@ -10,6 +10,7 @@
     -tipo: TipoTramite  tipo de trámite duda si será necesario o duplicado con nombre.
     -documentos: vector de Documentos asociados al trámite.
     -observaciones: string
+    -idtécnico asignado
 */
 
 export class Tramite {
@@ -18,13 +19,13 @@ export class Tramite {
         public nombre:string,
         public estado: string, //CAMBIAR POR ENUM
         public fechaInicio: Date,
-        public fechaFin: Date,
         public idusuario: string,
         public codigo: string,
-        public tipo: string,
         public tipoTramite: string, //CAMBIAR POR ENUM
-        public documentos: string[],
-        public observaciones: string
+        public fechaFin?: Date,
+        public documentos?: string[],
+        public observaciones?: string,
+        public idtecnico?: string
     ){
         
 
