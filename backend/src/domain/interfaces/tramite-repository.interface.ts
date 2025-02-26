@@ -1,4 +1,4 @@
-import {CreateTramiteDto} from "../../infrastructure/adapters/controllers/tramite/dto/create-tramite.dto";
+import {CreateTramiteDto} from "../dto/create-tramite.dto";
 import {Tramite} from "../entities/tramite.entity";
 
 export interface ITramiteRepository {

@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Tramite } from '../../domain/entities/tramite.entity';
 import { ITramiteRepository } from '../../domain/interfaces/tramite-repository.interface';
-import { CreateTramiteDto } from '../adapters/controllers/tramite/dto/create-tramite.dto';
+import { CreateTramiteDto } from '../../domain/dto/create-tramite.dto';
 
 
 @Injectable()

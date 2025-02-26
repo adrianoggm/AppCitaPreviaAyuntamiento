@@ -3,7 +3,7 @@ import{ Module } from '@nestjs/common';
 import { TramiteController } from '../tramite.controller';
 import { CreateTramiteUseCase  } from '../../../../application/use-cases/create-tramite.use-case';
 import { MongooseModule } from '@nestjs/mongoose';
-import { TramiteSchema } from '../../../persistence/tramite.schema';
+import { TramiteSchema } from '../../../../domain/schemas/tramite.schema';
 import { TramiteRepository  } from '../../../persistence/tramite.repository';
 
 //TODO falta por añadir la funcionalidad del  Repositorio
