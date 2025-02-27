@@ -15,9 +15,22 @@ export class UsuarioRepository implements IUsuarioRepository {
         return createdusuario.save();
     }
     //async 
-    async findUsuarioByName(nombreusuario: string): Promise<Usuario|null>{
-            console.log("USUARIO "+nombreusuario);
-        return  await this.usuarioModel.findOne({nombreusuario: nombreusuario }).exec();
-    }
+    /*
+    async findAllUsuarios(): Promise<Usuario[]|null> {
+        const usuarios = await this.usuarioModel.find({}).exec();
+        console.log('Usuarios en BD:', usuarios);
+        return usuarios;
+      }
+        */
+     
+    async findUsuarioByName(nombreusuario1: string): Promise<Usuario | null> {
+        console.log(nombreusuario1)
+        const usuarioDoc = await this.usuarioModel.findOne({ "nombreusuario": nombreusuario1 }).exec();
+        console.log(usuarioDoc)
+        return usuarioDoc ? usuarioDoc.toJSON() : null;
+      }
+      
+      
+      
     
 }

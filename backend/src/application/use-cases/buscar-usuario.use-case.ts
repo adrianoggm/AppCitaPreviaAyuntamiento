@@ -13,9 +13,19 @@ export class BuscarUsuarioUseCase {
         private readonly usuarioRepository: IUsuarioRepository,
     ){}
 
-    async execute(nombreusuario: string): Promise<Usuario|null> {
-       const  usario= await this.usuarioRepository.findUsuarioByName(nombreusuario);
-        return usario;
-    }
+    async execute(nombreusuario: string): Promise<Usuario | null> {
+        console.log("Buscando usuario con nombre:", nombreusuario);
+        const usuario = await this.usuarioRepository.findUsuarioByName(nombreusuario);
+        console.log("Usuario encontrado:", usuario);
+        return usuario;
+      }
+    /*
+      async execute(nombreusuario: string): Promise<Usuario[] | null> {
+        console.log("Buscando usuario con nombre:", nombreusuario);
+        const usuario = await this.usuarioRepository.findUsuarioByName(nombreusuario);
+        console.log("Usuario encontrado:", usuario);
+        return usuario;
+      }
+    */
 
 } 
