@@ -1,5 +1,5 @@
+
 import { Injectable,Inject} from '@nestjs/common';
-import { CreateUsuarioDto } from 'src/domain/dto/create-usuario.dto';
 import {IUsuarioRepository } from '../../domain/interfaces/usuario-repository.interface'
 import { Usuario}       from '../../domain/entities/usuario.entity'
 
@@ -7,16 +7,15 @@ import { Usuario}       from '../../domain/entities/usuario.entity'
 //Caso de uso del trámite 
 //CREAMOS EL USUARIOS 
 @Injectable()
-export class CreateUsuarioUseCase {
+export class BuscarUsuarioUseCase {
     constructor(
         @Inject('IUsuarioRepository')
         private readonly usuarioRepository: IUsuarioRepository,
     ){}
 
-    async execute (CreateUsuarioDto: CreateUsuarioDto) : Promise<Usuario> {
-       // console.log("LLEEEGAAAAA ",CreateUsuarioDto);
-        return this.usuarioRepository.createUsuario(CreateUsuarioDto);
+    async execute(nombreusuario: string): Promise<Usuario|null> {
+       const  usario= await this.usuarioRepository.findUsuarioByName(nombreusuario);
+        return usario;
     }
-
 
 } 

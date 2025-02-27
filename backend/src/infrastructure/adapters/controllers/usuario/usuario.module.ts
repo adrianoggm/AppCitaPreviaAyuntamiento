@@ -4,6 +4,7 @@ import { CreateUsuarioUseCase  } from '../../../../application/use-cases/create-
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsuarioSchema } from '../../../../domain/schemas/usuario.schema';
 import { UsuarioRepository  } from '../../../persistence/usuario.repository';
+import { BuscarUsuarioUseCase } from "src/application/use-cases/buscar-usuario.use-case";
 
 
 @Module({
@@ -11,7 +12,7 @@ import { UsuarioRepository  } from '../../../persistence/usuario.repository';
       MongooseModule.forFeature([{ name:'Usuario',schema: UsuarioSchema }]),
     ],
     controllers: [UsuarioController],
-    providers: [CreateUsuarioUseCase ,
+    providers: [CreateUsuarioUseCase ,BuscarUsuarioUseCase,                                            //Aqui hay que importar los usecase porque si no no los reconoce 
       {
         provide: 'IUsuarioRepository',
         useClass: UsuarioRepository,
