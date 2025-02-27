@@ -52,4 +52,5 @@ UsuarioSchema.pre('save', async function (next) {
 UsuarioSchema.virtual('id').get(function(){
     return this._id.toHexString();
   });
+  
 UsuarioSchema.set('toJSON', { virtuals: true });

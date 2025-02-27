@@ -23,12 +23,22 @@ export class UsuarioRepository implements IUsuarioRepository {
       }
         */
      
-    async findUsuarioByName(nombreusuario1: string): Promise<Usuario | null> {
-        console.log(nombreusuario1)
-        const usuarioDoc = await this.usuarioModel.findOne({ "nombreusuario": nombreusuario1 }).exec();
-        console.log(usuarioDoc)
+    
+      async findUsuarioByName(nombreusuario: string): Promise<Usuario | null> {
+        /*console.log("Buscando en la colección:", this.usuarioModel.collection.name);
+        console.log("Valor de nombreusuario recibido:", nombreusuario);
+        if(nombreusuario!='usuario1232454'){
+          console.log("Raro",typeof nombreusuario);
+        }
+        const usuarios = await this.usuarioModel.find({nombreusuario: 'usuario1232454' }).exec();
+        console.log(usuarios);
+        //console.log(usuarios[0]["nombreusuario"]);
+        */
+        const usuarioDoc = await this.usuarioModel.findOne({ nombreusuario }).exec();
+        console.log("Resultado de la consulta:", usuarioDoc);
         return usuarioDoc ? usuarioDoc.toJSON() : null;
       }
+      
       
       
       

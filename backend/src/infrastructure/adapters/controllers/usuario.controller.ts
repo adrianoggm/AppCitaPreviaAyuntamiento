@@ -19,7 +19,7 @@ export class UsuarioController{
     }
     //Busco por nombre de usario
     @Get()
-    async findUsuarioByName(@Query("nombreusuario") nombreusuario:string): Promise <Usuario|null>{
+    async findUsuarioByName(@Query('nombreusuario') nombreusuario:string): Promise <Usuario|null>{
         return await this.buscarUsuarioUseCase.execute(nombreusuario);
     }
     /*@Get()
