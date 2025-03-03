@@ -35,7 +35,8 @@ export class TecnicoRepository implements ITecnicoRepository {
         //console.log(tecnicos[0]["nombretecnico"]);
         */
         const tecnicoDoc = await this.tecnicoModel.findOne({ nombretecnico }).exec();
-        console.log("Resultado de la consulta:", tecnicoDoc);
+        //console.log("Nombre ",nombretecnico)
+        //console.log("Resultado de la consulta:", tecnicoDoc);
         return tecnicoDoc ? tecnicoDoc.toJSON() : null;
       }
       

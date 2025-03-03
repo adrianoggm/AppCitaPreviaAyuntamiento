@@ -24,7 +24,7 @@ export const TecnicoSchema = new Schema({
   contrasena: { type: String, required: true },
   correo: { type: String, required: true, unique: true },
   telefono: { type: String, required: true },
-  certificado: { type: String, required: true },
+  certificado: { type: String },
 });
 
 // Función para generar un certificado digital usando node-forge

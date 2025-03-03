@@ -19,9 +19,9 @@ import {
 
 
 export class CreateTecnicoDto{
-    @IsNotEmpty()
+    /*@IsNotEmpty()
     @IsString()
-    readonly id: string;
+    readonly id: string;*/
     
     @IsNotEmpty()
     @IsString()
@@ -50,9 +50,7 @@ export class CreateTecnicoDto{
     @IsNotEmpty()
     @IsString()
     telefono : string;
-
-    @IsNotEmpty()
-    @IsString()
-    certificado : string;
+   
+    
 }
 

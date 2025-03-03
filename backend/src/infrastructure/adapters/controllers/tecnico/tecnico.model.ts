@@ -14,7 +14,7 @@ import { BuscarTecnicoUseCase } from 'src/application/use-cases/buscar-tecnico.u
     controllers: [TecnicoController],
     providers: [CreateTecnicoUseCase , BuscarTecnicoUseCase,
       {
-        provide: 'ITramiteRepository',
+        provide: 'ITecnicoRepository',
         useClass: TecnicoRepository,
     },],
 })
