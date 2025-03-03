@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TramiteModule } from './infrastructure/adapters/controllers/tramite/tramite.module';
 import { UsuarioModule}   from './infrastructure/adapters/controllers/usuario/usuario.module';
 import { ConfigModule } from '@nestjs/config';
+import { TecnicoModule } from './infrastructure/adapters/controllers/tecnico/tecnico.model';
 
 const config = ConfigModule.forRoot({
   envFilePath: ['local.env', '.env'],
@@ -23,6 +24,7 @@ const config = ConfigModule.forRoot({
     config,
     TramiteModule,
     UsuarioModule,
+    TecnicoModule,
     MongooseModule.forRoot(process.env.DATABASE_URI??"localhost"),
     
   ],
