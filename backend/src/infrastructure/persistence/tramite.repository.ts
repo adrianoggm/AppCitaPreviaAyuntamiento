@@ -25,8 +25,9 @@ export class TramiteRepository implements ITramiteRepository {
         if (filtros.idtecnico) {
           query.idtecnico = filtros.idtecnico;
         }
-        console.log("Consulta generada:", query);
+        //console.log("Consulta generada:", query);
         const tramites = await this.tramiteModel.find(query).exec();
+        //console.log("Consulta generada:", tramites);
         return tramites.map(doc => doc.toJSON());
       }
 }
