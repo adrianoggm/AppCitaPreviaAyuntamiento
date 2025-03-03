@@ -9,7 +9,7 @@
         contrasena      Contraseña      // cifrarla
         correo
         telefono
-        certificado
+        certificado     //se genera y se cifra // es el certificado de firma que tiene esta persona solo será modificable por superadmin
 */
 
 
@@ -24,6 +24,8 @@ export class Tecnico{
         public contrasena:string,
         public correo: string,
         public telefono:string,
+        public departamamento:string,
+        public localizacion:string,
         public certificado:string,  //Certificado de firma asociado?
     ){}
 }

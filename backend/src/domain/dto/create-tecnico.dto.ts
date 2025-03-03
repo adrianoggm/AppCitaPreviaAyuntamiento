@@ -50,7 +50,14 @@ export class CreateTecnicoDto{
     @IsNotEmpty()
     @IsString()
     telefono : string;
-   
+
+    @IsNotEmpty()
+    @IsString()
+    departamamento:string;
+    
+    @IsNotEmpty()
+    @IsString()
+    localizacion:string;
     
 }
 
