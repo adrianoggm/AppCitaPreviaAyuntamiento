@@ -10,11 +10,13 @@ import { Usuario}       from '../../domain/entities/usuario.entity'
 export class CreateUsuarioUseCase {
     constructor(
         @Inject('IUsuarioRepository')
-        private readonly tramiteRepository: IUsuarioRepository,
+        private readonly usuarioRepository: IUsuarioRepository,
     ){}
 
     async execute (CreateUsuarioDto: CreateUsuarioDto) : Promise<Usuario> {
        // console.log("LLEEEGAAAAA ",CreateUsuarioDto);
-        return this.tramiteRepository.createUsuario(CreateUsuarioDto);
+        return this.usuarioRepository.createUsuario(CreateUsuarioDto);
     }
+
+
 } 

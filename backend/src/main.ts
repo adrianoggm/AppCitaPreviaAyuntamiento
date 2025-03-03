@@ -12,7 +12,7 @@ async function bootstrap() {
       transform: true, // convierte los datos de entrada al tipo esperado
     }),
   )
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3100);
 
 }
 bootstrap();

@@ -23,7 +23,7 @@ export const TramiteSchema = new Schema({
 
     idusuario: {type: String, required: true},
     codigo: {type: String, required: true}, 
-    tipo: {type: String},   //IGUAL HAY QUE CAMBIARLIO 
+    tipoTramite: {type: String},   //IGUAL HAY QUE CAMBIARLIO 
     idtecnico: { type: String, required: true },
     documentos: {type: [String]},
     observaciones: {type: String}  

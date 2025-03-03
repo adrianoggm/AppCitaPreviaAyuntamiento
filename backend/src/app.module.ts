@@ -6,15 +6,26 @@ import {ServeStaticModule} from '@nestjs/serve-static';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TramiteModule } from './infrastructure/adapters/controllers/tramite/tramite.module';
 import { UsuarioModule}   from './infrastructure/adapters/controllers/usuario/usuario.module';
+import { ConfigModule } from '@nestjs/config';
+import { TecnicoModule } from './infrastructure/adapters/controllers/tecnico/tecnico.model';
+
+const config = ConfigModule.forRoot({
+  envFilePath: ['local.env', '.env'],
+  isGlobal: true,
+})
+
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'frontend'), 
+      
       //exclude: ['/api/(.*)'], //excluyo las rutas de api
     }),
+    config,
     TramiteModule,
     UsuarioModule,
-    MongooseModule.forRoot('mongodb+srv://aggm000edu:1@aytocitaprevia.ulfz9.mongodb.net/?retryWrites=true&w=majority&appName=AytoCitaprevia'),
+    TecnicoModule,
+    MongooseModule.forRoot(process.env.DATABASE_URI??"localhost"),
     
   ],
   
