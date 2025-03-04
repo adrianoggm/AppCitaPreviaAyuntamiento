@@ -53,7 +53,7 @@ export class CreateTecnicoDto{
 
     @IsNotEmpty()
     @IsString()
-    departamamento:string;
+    departamento:string;
     
     @IsNotEmpty()
     @IsString()

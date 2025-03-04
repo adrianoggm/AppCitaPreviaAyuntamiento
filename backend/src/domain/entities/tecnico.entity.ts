@@ -24,7 +24,7 @@ export class Tecnico{
         public contrasena:string,
         public correo: string,
         public telefono:string,
-        public departamamento:string,
+        public departamento:string,
         public localizacion:string,
         public certificado:string,  //Certificado de firma asociado?
     ){}
