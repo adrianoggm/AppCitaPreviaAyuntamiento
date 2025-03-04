@@ -1,4 +1,4 @@
-/*import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
 import { IDepartamentoRepository } from '../../domain/interfaces/departamento-repository.interface';
 import { ITecnicoRepository } from '../../domain/interfaces/tecnico-repository.interface';
@@ -10,7 +10,7 @@ de tramites  posteriormente con el id.tecnico acoto la localizacion si me la pro
 tecnicos del departamento si no hay para esa localizacion debo sacar que no hay .  Si hay saco las Fechahora disponibles 
 para ello creo un map[fecha_hora: idtecnicos]  buscando en la tabla de citas  construyendo desde la fecha_hora actual 
  hasta dentro de una semana. Las franjas de tiempo van de 8-14 en intervalos de 30 minutos  devuelve un set con las 
- fechashoras disponibles 
+ fechashoras disponibles */
 @Injectable()
 export class ObtenerHorasSemanaCitaUseCase {
   constructor(
@@ -88,7 +88,7 @@ export class ObtenerHorasSemanaCitaUseCase {
   }
 }
 
-*/
+
 
 
 

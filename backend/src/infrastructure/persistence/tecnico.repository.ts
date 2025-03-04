@@ -41,7 +41,27 @@ export class TecnicoRepository implements ITecnicoRepository {
       }
       
       
-      
-      
-    
+      async findByDepartamentosAndLocalizacion(departamentos: string[], localizacion: string): Promise<Tecnico[]> {
+        console.log(`Buscando técnicos en departamentos: ${departamentos} y localización: ${localizacion}`);
+        
+        const tecnicoDocs = await this.tecnicoModel.find({
+            departamento: { $in: departamentos },
+            localizacion: localizacion
+        }).exec();
+
+        console.log(`Técnicos encontrados: ${JSON.stringify(tecnicoDocs)}`);
+
+        return tecnicoDocs.length ? tecnicoDocs.map(tecnico => tecnico.toJSON()) : [];
+    }
+
+
+    async findByDepartamentos(departamentos):Promise<Tecnico[]>{
+      console.log(`Buscando técnicos en departamentos: ${departamentos}`);
+      const tecnicoDocs = await this.tecnicoModel.find({
+        departamento: { $in: departamentos },
+    }).exec();
+    console.log(`Técnicos encontrados: ${JSON.stringify(tecnicoDocs)}`);
+
+        return tecnicoDocs.length ? tecnicoDocs.map(tecnico => tecnico.toJSON()) : [];
+    }
 }
