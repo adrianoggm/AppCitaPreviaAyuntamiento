@@ -39,7 +39,10 @@ export class DepartamentoRepository implements IDepartamentoRepository {
         //console.log("Resultado de la consulta:", departamentoDoc);
         return departamentoDoc ? departamentoDoc.toJSON() : null;
       }
-      
+
+      async findDepartamentoByTipoTramite(tipoTramite: string): Promise<Departamento[]> {
+        return await this.departamentoModel.find({ TipoTramites: tipoTramite }).exec();
+      }
       
       
       

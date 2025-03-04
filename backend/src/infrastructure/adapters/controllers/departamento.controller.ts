@@ -22,6 +22,8 @@ export class DepartamentoController{
     async findDepartamentoByName(@Query('nombredepartamento') nombredepartamento:string): Promise <Departamento|null>{
         return await this.buscarDepartamentoUseCase.execute(nombredepartamento);
     }
+
+    
     /*@Get()   //Busco los que pertenezcan a mismo departamento
     async findAllUsuarios(@Query("Departamento") nombreusuario:string): Promise <Usuario[]|null>{
         return await this.buscarUsuarioUseCase.execute(nombreusuario);

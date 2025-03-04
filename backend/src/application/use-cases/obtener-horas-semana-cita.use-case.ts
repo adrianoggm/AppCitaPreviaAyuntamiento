@@ -1,4 +1,4 @@
-/*import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
 import { IDepartamentoRepository } from '../../domain/interfaces/departamento-repository.interface';
 import { ITecnicoRepository } from '../../domain/interfaces/tecnico-repository.interface';
@@ -10,7 +10,7 @@ de tramites  posteriormente con el id.tecnico acoto la localizacion si me la pro
 tecnicos del departamento si no hay para esa localizacion debo sacar que no hay .  Si hay saco las Fechahora disponibles 
 para ello creo un map[fecha_hora: idtecnicos]  buscando en la tabla de citas  construyendo desde la fecha_hora actual 
  hasta dentro de una semana. Las franjas de tiempo van de 8-14 en intervalos de 30 minutos  devuelve un set con las 
- fechashoras disponibles 
+ fechashoras disponibles */
 @Injectable()
 export class ObtenerHorasSemanaCitaUseCase {
   constructor(
@@ -25,7 +25,7 @@ export class ObtenerHorasSemanaCitaUseCase {
   async execute(tipoTramite: string, localizacion?: string): Promise<Map<string, string[]>> {
     // 1. Buscar departamentos que gestionan el tipo de trámite
     //
-    const departamentos = await this.departamentoRepository.findByTipoTramite(tipoTramite);
+    const departamentos = await this.departamentoRepository.findDepartamentoByTipoTramite(tipoTramite);
     if (!departamentos || departamentos.length === 0) {
       throw new NotFoundException('No se encontraron departamentos para el tipo de trámite indicado.');
     }
@@ -87,7 +87,6 @@ export class ObtenerHorasSemanaCitaUseCase {
     return availableSlots;
   }
 }
-*/
 
 
 
