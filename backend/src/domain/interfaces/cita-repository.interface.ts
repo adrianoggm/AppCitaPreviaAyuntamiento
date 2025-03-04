@@ -7,4 +7,5 @@ export interface ICitaRepository {
     //findDepartamentoByName( nombredepartamento: string) : Promise<Departamento|null>;
     //findDepartamentoByTipoTramite(tipoTramite: string): Promise<Departamento[]> ;
     //findAllUsuarios( nombreusuario: string) : Promise<Usuario[]|null>;
+    findBetweenDatesForTecnicos(startDate: Date, endDate: Date, tecnicosIds: string[]): Promise<Cita[]> ;
 }
