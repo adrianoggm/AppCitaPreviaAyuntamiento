@@ -2,11 +2,12 @@ import { Controller,Post,Body,Get,  Query } from "@nestjs/common";
 import { CreateCitaDto } from "src/domain/dto/create-cita.dto";
 import { Cita} from "src/domain/entities/cita.entity";
 import { CreateCitaUseCase } from "src/application/use-cases/create-cita.use-case"
-
+import {ObtenerHorasSemanaCitaUseCase} from "src/application/use-cases/obtener-horas-semana-cita.use-case"
 @Controller("api/cita")
 export class CitaController{
     constructor (
         private readonly  createCitaUseCase: CreateCitaUseCase,
+        private readonly ObtenerHorasSemanaCitaUseCase: ObtenerHorasSemanaCitaUseCase,
     ){}
 
     @Post()
@@ -16,7 +17,13 @@ export class CitaController{
     }
 
 
-    
+    @Get('/horas-disponibles')
+  async obtenerHorasDisponibles(
+    @Query('tipoTramite') tipoTramite: string,
+    @Query('localizacion') localizacion?: string
+  ) {
+    return await this.ObtenerHorasSemanaCitaUseCase.execute(tipoTramite, localizacion);
+  }
     /*@Get()   //Busco los que pertenezcan a mismo cita
     async findAllUsuarios(@Query("Cita") nombreusuario:string): Promise <Usuario[]|null>{
         return await this.buscarUsuarioUseCase.execute(nombreusuario);
