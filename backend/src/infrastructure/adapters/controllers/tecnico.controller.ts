@@ -19,7 +19,7 @@ export class TecnicoController{
     }
     //Busco por nombre de usario
     @Get()
-    async findUsuarioByName(@Query('nombretecnico') nombretecnico:string): Promise <Tecnico|null>{
+    async findTecnicoByName(@Query('nombretecnico') nombretecnico:string): Promise <Tecnico|null>{
         return await this.buscarTecnicoUseCase.execute(nombretecnico);
     }
     /*@Get()   //Busco los que pertenezcan a mismo departamento
