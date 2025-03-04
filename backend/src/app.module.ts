@@ -9,7 +9,7 @@ import { UsuarioModule}   from './infrastructure/adapters/controllers/usuario/us
 import { ConfigModule } from '@nestjs/config';
 import { TecnicoModule } from './infrastructure/adapters/controllers/tecnico/tecnico.module';
 import { DepartamentoModule } from './infrastructure/adapters/controllers/departamento/departamento.module';
-
+import { CitaModule } from './infrastructure/adapters/controllers/cita/cita.module';
 const config = ConfigModule.forRoot({
   envFilePath: ['local.env', '.env'],
   isGlobal: true,
@@ -27,6 +27,7 @@ const config = ConfigModule.forRoot({
     UsuarioModule,
     TecnicoModule,
     DepartamentoModule,
+    CitaModule,
     MongooseModule.forRoot(process.env.DATABASE_URI??"localhost"),
     
   ],
