@@ -55,13 +55,13 @@ export class TecnicoRepository implements ITecnicoRepository {
     }
 
 
-    async findByDepartamentos(departamentos):Promise<Tecnico[]>{
-      console.log(`Buscando técnicos en departamentos: ${departamentos}`);
+    async findByDepartamentos(codigosDepartamento: string[]): Promise<Tecnico[]> {
+      console.log(`Buscando técnicos en departamentos con código: ${codigosDepartamento}`);
       const tecnicoDocs = await this.tecnicoModel.find({
-        departamento: { $in: departamentos },
-    }).exec();
-    console.log(`Técnicos encontrados: ${JSON.stringify(tecnicoDocs)}`);
-
-        return tecnicoDocs.length ? tecnicoDocs.map(tecnico => tecnico.toJSON()) : [];
+        departamento: { $in: codigosDepartamento },
+      }).exec();
+      console.log(`Técnicos encontrados: ${JSON.stringify(tecnicoDocs)}`);
+      return tecnicoDocs.length ? tecnicoDocs.map(tecnico => tecnico.toJSON()) : [];
     }
+    
 }

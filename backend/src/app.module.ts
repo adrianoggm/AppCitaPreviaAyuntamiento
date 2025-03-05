@@ -20,7 +20,7 @@ const config = ConfigModule.forRoot({
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'frontend'), 
       
-      //exclude: ['/api/(.*)'], //excluyo las rutas de api
+      exclude: ['/api/(.*)'], //excluyo las rutas de api
     }),
     config,
     TramiteModule,

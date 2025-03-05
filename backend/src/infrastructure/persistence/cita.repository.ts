@@ -16,6 +16,7 @@ export class CitaRepository implements ICitaRepository {
     }
    
     async findBetweenDatesForTecnicos(startDate: Date, endDate: Date, tecnicosIds: string[]): Promise<Cita[]> {
+        console.log(startDate, endDate, tecnicosIds)
         return await this.citaModel.find({
             idtecnico: { $in: tecnicosIds },
             fechahora: { $gte: startDate.toISOString(), $lte: endDate.toISOString() }
