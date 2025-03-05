@@ -26,7 +26,9 @@ export class CitaController{
       const horasdisponibles = await this.ObtenerHorasSemanaCitaUseCase.execute(tipoTramite, localizacion);
       // Convertimos el Map a un objeto
       const horas =  Array.from(horasdisponibles.keys());
-      return horas;
+      const horasLocales = horas.map(isoStr => new Date(isoStr).toLocaleString());
+     return horasLocales;
+
     }
     /*@Get()   //Busco los que pertenezcan a mismo cita
     async findAllUsuarios(@Query("Cita") nombreusuario:string): Promise <Usuario[]|null>{
