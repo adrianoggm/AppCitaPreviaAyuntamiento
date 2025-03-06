@@ -56,7 +56,7 @@ export class ObtenerHorasSemanaCitaUseCase {
     const now = new Date();
     const oneWeekAhead = new Date(now);
     oneWeekAhead.setDate(now.getDate() + 7);
-    console.log("Ahora:", now , " Despues : ",oneWeekAhead);
+    console.log("AHORA :", now , " DESPUES : ",oneWeekAhead);
     
     // Ontengo todas las citas existentes en ese rango para los técnicos encontrados
     const citas = await this.citaRepository.findBetweenDatesForTecnicos(now, oneWeekAhead, tecnicos.map(t => t.id));

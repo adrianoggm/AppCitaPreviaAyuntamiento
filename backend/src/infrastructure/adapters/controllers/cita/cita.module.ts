@@ -10,6 +10,7 @@ import { DepartamentoModule } from 'src/infrastructure/adapters/controllers/depa
 import { TecnicoModule } from 'src/infrastructure/adapters/controllers/tecnico/tecnico.module';
 
 import { TramiteModule } from 'src/infrastructure/adapters/controllers/tramite/tramite.module';
+import { ObtenerDiasMesCitaUseCase } from 'src/application/use-cases/obtener-dias-mes-cita.use-case';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TramiteModule } from 'src/infrastructure/adapters/controllers/tramite/t
   providers: [
     CreateCitaUseCase,
     ObtenerHorasSemanaCitaUseCase,
+    ObtenerDiasMesCitaUseCase,
     {
       provide: 'ICitaRepository',
       useClass: CitaRepository,
