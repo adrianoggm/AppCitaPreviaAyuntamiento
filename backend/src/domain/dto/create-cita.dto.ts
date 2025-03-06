@@ -23,19 +23,22 @@ export class CreateCitaDto{
     @IsString()
     idtramite: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     departamento : string;
 
-    @IsNotEmpty()
-    @IsString()
-    estado : string;
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsString()
     fechahora : string;
     @IsOptional()
     @IsString() 
     idtecnico : string;
+
+    @IsOptional()
+    @IsString() 
+    localizacion : string;
+
+    
 
 }

@@ -4,7 +4,8 @@ import { IDepartamentoRepository } from '../../domain/interfaces/departamento-re
 import { ITecnicoRepository } from '../../domain/interfaces/tecnico-repository.interface';
 import { ICitaRepository } from '../../domain/interfaces/cita-repository.interface';
 
-/*ObtenerHorasSemanaCitaUseCase obtinen todas las horas disponibles para un tipo.tramite  
+/*
+ObtenerHorasSemanaCitaUseCase obtinen todas las horas disponibles para un tipo.tramite  
 para ello miro a que departamento o departamentos corresponde la lista de tramites que se encargan de ese tipo 
 de tramites  posteriormente con el id.tecnico acoto la localizacion si me la proporcionan si no pues busco todos los 
 tecnicos del departamento si no hay para esa localizacion debo sacar que no hay .  Si hay saco las Fechahora disponibles 
@@ -36,9 +37,9 @@ export class ObtenerHorasSemanaCitaUseCase {
   
     // Extraer los códigos de departamento de cada departamento
     const codigosDepartamento = departamentos.map(dep => dep.codigodepartamento);
-    console.log("Códigos de departamento extraídos:", codigosDepartamento);
+    console.log("CODIGOS:", codigosDepartamento);
     
-    // 2. Buscar técnicos en base a los códigos de departamento  y localizacoon
+    // Busco  técnicos en base a los códigos de departamento  y localizacoon
     let tecnicos;
     if (localizacion) {
       tecnicos = await this.tecnicoRepository.findByDepartamentosAndLocalizacion(codigosDepartamento, localizacion);
@@ -92,8 +93,7 @@ export class ObtenerHorasSemanaCitaUseCase {
             .map(cita => cita.idtecnico);
           console.log("OCUPADO",tecnicosOcupados);
 
-          const tecnicosDisponibles = tecnicos
-        .map(tecnico => tecnico.id.toString())
+          const tecnicosDisponibles = tecnicos.map(tecnico => tecnico.id.toString())
         .filter(id => !tecnicosOcupados.includes(id));
       console.log("Técnicos disponibles:", tecnicosDisponibles);
           // Si hay técnicos disponibles, agregamos la franja al mapa

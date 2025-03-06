@@ -18,5 +18,9 @@ import { BuscarTramiteUseCase } from 'src/application/use-cases/buscar-tramite.u
         provide: 'ITramiteRepository',
         useClass: TramiteRepository,
     },],
+    exports: [
+      MongooseModule,
+      'ITramiteRepository',
+    ],
 })
 export class TramiteModule {}

@@ -25,7 +25,7 @@ export class Tramite {
         public fechaFin?: Date,
         public documentos?: string[],
         public observaciones?: string,
-        public idtecnico?: string
+       // public idtecnico?: string diria que No sirve una vez tenemos la tabla de CITAS 
     ){
         
 

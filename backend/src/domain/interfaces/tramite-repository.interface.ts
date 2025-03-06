@@ -5,5 +5,5 @@ export interface ITramiteRepository {
     // Crea un nuevo trámite pasandole el formato con el departamento . 
     createTramite(tramite: CreateTramiteDto): Promise<Tramite>;
     findTramites(filtros: { tipoTramite?: string; idusuario?: string; idtecnico?: string } ): Promise<Tramite[]>;
-
+    findById(idtramite: string):Promise<Tramite|null>;
 }

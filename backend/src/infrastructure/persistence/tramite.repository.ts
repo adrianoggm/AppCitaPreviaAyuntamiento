@@ -30,4 +30,10 @@ export class TramiteRepository implements ITramiteRepository {
         //console.log("Consulta generada:", tramites);
         return tramites.map(doc => doc.toJSON());
       }
+      async findById(idtramite: string): Promise<Tramite | null> {
+        const tramite = await this.tramiteModel.findById(idtramite).exec();
+        console.log("Resultado de la consulta:", tramite);
+        return tramite ? tramite.toJSON() : null;
+      }
+      
 }

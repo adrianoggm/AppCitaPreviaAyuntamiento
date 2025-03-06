@@ -9,10 +9,13 @@ import { ObtenerHorasSemanaCitaUseCase } from 'src/application/use-cases/obtener
 import { DepartamentoModule } from 'src/infrastructure/adapters/controllers/departamento/departamento.module';
 import { TecnicoModule } from 'src/infrastructure/adapters/controllers/tecnico/tecnico.module';
 
+import { TramiteModule } from 'src/infrastructure/adapters/controllers/tramite/tramite.module';
+
 @Module({
   imports: [
-    DepartamentoModule,  // Ahora exporta IDepartamentoRepository
+    DepartamentoModule,  // Exporta IDepartamentoRepository
     TecnicoModule,       // Exporta ITecnicoRepository
+    TramiteModule,       //Eporta TIramiteModule
     MongooseModule.forFeature([{ name: 'Cita', schema: CitaSchema }]),
   ],
   controllers: [CitaController],
