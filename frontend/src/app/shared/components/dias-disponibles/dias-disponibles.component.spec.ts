@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {  TestBed } from '@angular/core/testing';
 import { DiasDisponiblesComponent } from './dias-disponibles.component';
-import { CitaService } from '../../../core/services/cita.service';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+
 
 
 describe('DiasDisponiblesComponent', () => {
-  let component: DiasDisponiblesComponent;
-  let fixture: ComponentFixture<DiasDisponiblesComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DiasDisponiblesComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(DiasDisponiblesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      imports: [DiasDisponiblesComponent],
+      providers: [
+        provideHttpClient(),       // Provee HttpClient
+        provideHttpClientTesting() // Provee las utilidades para testing de HttpClient
+      ]
+    }).compileComponents();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(DiasDisponiblesComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });

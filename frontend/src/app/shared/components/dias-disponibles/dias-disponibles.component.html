@@ -1,1 +1,7 @@
-<p>dias-disponibles works!</p>
+<h2>Días Disponibles</h2>
+<ul>
+  <li *ngFor="let dia of diasDisponibles">{{ dia }}</li>
+</ul>
+<div *ngIf="errorMessage" class="error">
+  {{ errorMessage }}
+</div>
