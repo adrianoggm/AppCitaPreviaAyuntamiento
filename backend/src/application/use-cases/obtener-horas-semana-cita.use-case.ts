@@ -1,16 +1,17 @@
-/*import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
 import { IDepartamentoRepository } from '../../domain/interfaces/departamento-repository.interface';
 import { ITecnicoRepository } from '../../domain/interfaces/tecnico-repository.interface';
 import { ICitaRepository } from '../../domain/interfaces/cita-repository.interface';
 
-/*ObtenerHorasSemanaCitaUseCase obtinen todas las horas disponibles para un tipo.tramite  
+/*
+ObtenerHorasSemanaCitaUseCase obtinen todas las horas disponibles para un tipo.tramite  
 para ello miro a que departamento o departamentos corresponde la lista de tramites que se encargan de ese tipo 
 de tramites  posteriormente con el id.tecnico acoto la localizacion si me la proporcionan si no pues busco todos los 
 tecnicos del departamento si no hay para esa localizacion debo sacar que no hay .  Si hay saco las Fechahora disponibles 
 para ello creo un map[fecha_hora: idtecnicos]  buscando en la tabla de citas  construyendo desde la fecha_hora actual 
  hasta dentro de una semana. Las franjas de tiempo van de 8-14 en intervalos de 30 minutos  devuelve un set con las 
- fechashoras disponibles 
+ fechashoras disponibles */
 @Injectable()
 export class ObtenerHorasSemanaCitaUseCase {
   constructor(
@@ -23,72 +24,93 @@ export class ObtenerHorasSemanaCitaUseCase {
   ) {}
 
   async execute(tipoTramite: string, localizacion?: string): Promise<Map<string, string[]>> {
-    // 1. Buscar departamentos que gestionan el tipo de trámite
-    //
+    //  Buscar departamentos que gestionan el tipo de trámite
     const departamentos = await this.departamentoRepository.findDepartamentoByTipoTramite(tipoTramite);
     if (!departamentos || departamentos.length === 0) {
       throw new NotFoundException('No se encontraron departamentos para el tipo de trámite indicado.');
     }
 
-    // 2. Con base en la localización: si se proporciona, buscar técnicos en esos departamentos y que tengan esa localización;
-    // de lo contrario, obtener todos los técnicos de esos departamentos.
+    //  Con base en la localización: si se proporciona, buscar técnicos en esos departamentos y que tengan esa localizacióon de lo contrario
+    //  obtener todos los técnicos de esos departamentos.
+
+    console.log("DEPARTAMENTOS A BUSCAR", departamentos);
+  
+    // Extraer los códigos de departamento de cada departamento
+    const codigosDepartamento = departamentos.map(dep => dep.codigodepartamento);
+    console.log("CODIGOS:", codigosDepartamento);
+    
+    // Busco  técnicos en base a los códigos de departamento  y localizacoon
     let tecnicos;
     if (localizacion) {
-      tecnicos = await this.tecnicoRepository.findByDepartamentosAndLocalizacion(departamentos, localizacion);
+      tecnicos = await this.tecnicoRepository.findByDepartamentosAndLocalizacion(codigosDepartamento, localizacion);
     } else {
-      tecnicos = await this.tecnicoRepository.findByDepartamentos(departamentos);
+      tecnicos = await this.tecnicoRepository.findByDepartamentos(codigosDepartamento);
     }
     if (!tecnicos || tecnicos.length === 0) {
       throw new NotFoundException('No hay técnicos disponibles para la localización o departamento indicado.');
     }
+    console.log("Tecnicos:", tecnicos);
+    // Rango de una semana en adelante 
+    //El formateo a la hora local se hace en el controller asi no tenemos problemas en el back.
 
-    // 3. Definir el rango de tiempo: desde ahora hasta una semana adelante
     const now = new Date();
     const oneWeekAhead = new Date(now);
     oneWeekAhead.setDate(now.getDate() + 7);
-
-    // Obtener todas las citas existentes en ese rango para los técnicos encontrados
+    console.log("AHORA :", now , " DESPUES : ",oneWeekAhead);
+    
+    // Ontengo todas las citas existentes en ese rango para los técnicos encontrados
     const citas = await this.citaRepository.findBetweenDatesForTecnicos(now, oneWeekAhead, tecnicos.map(t => t.id));
-
-    // 4. Construir el mapa de franjas horarias disponibles
-    // El mapa tendrá claves que son strings con la fecha-hora en formato ISO y valores que son arrays de IDs de técnicos disponibles.
-    const availableSlots = new Map<string, string[]>();
-
+    console.log(citas)
+    // Construir el map de franjas horarias disponibles
+    // El map es la fecha-hora en formato ISO y valores  de IDs de técnicos disponibles.
+    const horarioSlots = new Map<string, string[]>();
+    //const horarioSlots = new Map<string, string[]>();
     // Suponemos que el rango de horario es de 8:00 a 14:00 (8, 8:30, ... hasta 13:30)
-    // Iteramos por cada día del rango.
-    for (let day = new Date(now); day <= oneWeekAhead; day.setDate(day.getDate() + 1)) {
-      // Creamos una fecha base para el día actual (sin la hora)
-      const dateString = day.toISOString().split('T')[0];
-      // Iteramos por cada franja horaria (de 8:00 a 13:30)
-      for (let hour = 8; hour < 14; hour++) {
-        // Para cada hora, generamos dos franjas: :00 y :30 (excepto a las 14:00, se detiene en 13:30)
+    //TODO CAMBIAR LAS  horas a INICIO_FRANJA_HORARIA FIN_FRANJA_HORARIA y e idem con los minutos.
+    
+
+    for (let dia = new Date(now); dia < oneWeekAhead; dia.setDate(dia.getDate() + 1)) {
+    
+      const dateString = dia.toISOString().split('T')[0];
+      //console.log(dateString);
+      // Itero por cada franja horaria de 8:00 a 13:30
+      for (let hora = 8; hora < 14; hora++) {
+        // Para cada hora, genero dos franjas: :00 y :30 se para en las 13:30 para que la cita sea 13:30 - 14
         for (let minute of [0, 30]) {
           // Construimos la fecha completa para la franja horaria
-          const slotDate = new Date(day);
-          slotDate.setHours(hour, minute, 0, 0);
+          const slotDate = new Date(dia);
+          slotDate.setHours(hora, minute, 0, 0);
           const slotISO = slotDate.toISOString();
-          // Para esta franja, determinar cuáles técnicos están disponibles
+          //const slotISO = slotDate.toLocaleString();
+          console.log(slotDate);
+
+
+          horarioSlots.set(slotISO, tecnicos.map(t => t.id));
+          //console.log(horarioSlots);
           // Se filtran los técnicos que no tienen una cita asignada en ese mismo slot.
           const tecnicosOcupados = citas
-            .filter(cita => new Date(cita.fechaHora).toISOString() === slotISO)
-            .map(cita => cita.idTecnico);
-          const tecnicosDisponibles = tecnicos
-            .filter(tecnico => !tecnicosOcupados.includes(tecnico.id))
-            .map(tecnico => tecnico.id);
+            .filter(cita => new Date(cita.fechahora).toISOString() === slotISO)
+            .map(cita => cita.idtecnico);
+          console.log("OCUPADO",tecnicosOcupados);
 
+          const tecnicosDisponibles = tecnicos.map(tecnico => tecnico.id.toString())
+        .filter(id => !tecnicosOcupados.includes(id));
+      console.log("Técnicos disponibles:", tecnicosDisponibles);
           // Si hay técnicos disponibles, agregamos la franja al mapa
           if (tecnicosDisponibles.length > 0) {
-            availableSlots.set(slotISO, tecnicosDisponibles);
+            horarioSlots.set(slotISO, tecnicosDisponibles);
+           
           }
         }
       }
     }
-
-    return availableSlots;
+    console.log(horarioSlots);
+   // const keysSet = new Set(horarioSlots.keys());
+    return horarioSlots;
   }
 }
 
-*/
+
 
 
 

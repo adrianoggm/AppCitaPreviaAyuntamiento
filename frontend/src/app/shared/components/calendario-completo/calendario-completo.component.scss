@@ -1,0 +1,70 @@
+.calendar-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border: 1px solid #afabab;
+    button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .month-year {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+
+  .calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      width: 14.28%;
+      height: 80px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #afabab;
+    }
+
+    td {
+      cursor: pointer;
+      background-color: #e0e0e0; // Base para días del mes actual
+
+      &.beyond-window {
+        background-color: #ffffff; // Días fuera de la ventana de reserva
+        cursor: default;
+      }
+      &.past {
+        background-color: #888787; // Días pasados
+        color: #1d1c1c;
+        cursor: default;
+      }
+      &.available {
+        background-color: #c8e6c9; // Verde para días disponibles
+      }
+      &.not-available {
+        background-color: #f15564; // Rojo para días llenos
+      }
+      &:hover {
+        // Para evitar que el hover sobrescriba a los días disponibles o no disponibles, 
+        // aplicamos el hover solo a los que no tengan esas clases.
+        &:not(.available):not(.not-available) {
+          background-color: #637563;
+        }
+      }
+    }
+
+    td.not-current {
+      color: #aaa;
+      background-color: #f5f5f5;
+      cursor: default;
+    }
+  }
+}
