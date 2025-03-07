@@ -1,0 +1,18 @@
+.app-container {
+    padding: 20px;
+  }
+  
+  .layout {
+    display: flex;
+    align-items: flex-start; // Alinea el contenido al inicio
+  }
+  
+  app-sidebar {
+    flex: 0 0 250px; // Ancho fijo para el sidebar
+  }
+  
+  .content {
+    flex: 1; // El contenido principal ocupará el resto del espacio
+    margin-left: 20px; // Espacio entre el sidebar y el contenido
+  }
+  

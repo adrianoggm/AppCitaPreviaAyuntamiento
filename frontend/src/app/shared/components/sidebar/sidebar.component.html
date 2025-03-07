@@ -1,0 +1,16 @@
+<!-- sidebar.component.html -->
+<aside class="sidebar">
+    <div class="category" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+      <span>{{ config.tramites.title }}</span>
+      <div *ngIf="showDropdown" class="dropdown">
+        <div *ngFor="let item of config.tramites.items" class="dropdown-item">
+          {{ item.label }}
+        </div>
+      </div>
+    </div>
+    <div class="category">
+      <span>{{ config.datos.title }}</span>
+      <!-- Puedes agregar lógica o submenús para DATOS si fuera necesario -->
+    </div>
+  </aside>
+  

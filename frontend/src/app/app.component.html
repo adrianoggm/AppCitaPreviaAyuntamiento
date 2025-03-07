@@ -1,6 +1,13 @@
-<div>
+<div class="app-container">
   <h1>{{ title }}</h1>
-  <!-- Se muestra el calendario de días disponibles -->
-  <app-calendario-completo></app-calendario-completo>
-  <router-outlet></router-outlet>
+  <div class="layout">
+    <!-- Sidebar configurable -->
+    <app-sidebar [config]="sidebarConfig"></app-sidebar>
+
+    <!-- Contenido principal: Calendario y router -->
+    <div class="content">
+      <app-calendario-completo></app-calendario-completo>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

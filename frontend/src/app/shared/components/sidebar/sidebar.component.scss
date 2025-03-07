@@ -1,0 +1,42 @@
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background-color: #2c3e50; // Fondo oscuro
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ecf0f1; // Texto claro
+  
+    .category {
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 10px;
+  
+      &:hover {
+        background-color: #34495e;
+      }
+  
+      // Eliminamos el posicionamiento absoluto para que el dropdown forme parte del flujo normal
+      .dropdown {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        
+        .dropdown-item {
+          padding: 8px 15px;
+          transition: background-color 0.2s ease;
+  
+          &:hover {
+            background-color: #3c5a73;
+          }
+        }
+      }
+  
+      // Al hacer hover, expandimos el dropdown a una altura fija que cubra su contenido
+      &:hover .dropdown {
+        max-height: 200px; // Ajusta este valor según la altura real de los items
+      }
+    }
+  }
+  

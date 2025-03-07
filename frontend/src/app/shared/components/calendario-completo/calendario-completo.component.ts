@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CitaService } from '../../../core/services/cita.service';
 
@@ -7,15 +7,16 @@ import { CitaService } from '../../../core/services/cita.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './calendario-completo.component.html',
-  styleUrls: ['./calendario-completo.component.scss']
+  styleUrls: ['./calendario-completo.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated 
 })
 export class CalendarioCompletoComponent implements OnInit {
   currentDate: Date = new Date(); // Mes que se muestra actualmente
   weeks: Array<Array<{ date: Date | null; isCurrentMonth: boolean }>> = [];
   availableDates: string[] = [];
   
-  // Encabezados de la semana (puedes modificar para que empiece en lunes si lo prefieres)
-  dayNames: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+  
+  dayNames: string[] = [ 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb','Dom'];
 
   constructor(private citaService: CitaService) {}
 
@@ -41,7 +42,7 @@ export class CalendarioCompletoComponent implements OnInit {
     const lastDayOfMonth = new Date(year, month + 1, 0);
     const numDays = lastDayOfMonth.getDate();
 
-    // Índice del día de la semana del primer día del mes (0 = domingo)
+   
     const startDayIndex = firstDayOfMonth.getDay();
     let week: Array<{ date: Date | null; isCurrentMonth: boolean }> = [];
 
