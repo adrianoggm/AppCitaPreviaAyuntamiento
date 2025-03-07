@@ -58,7 +58,9 @@ export class CreateTramiteDto {
     @IsString({each: true}) //buscar como hacer que cada uno sea un string
     readonly documentos?: string[];
 
+    /*
     @IsOptional()
     @IsString()
-    idtecnico?: string;
+    idtecnico?: string;  //no sirve ya engo relacionado tramite y cita y a traves de la cita obtengo los diferentes tecnicos asignados 
+    */
 }

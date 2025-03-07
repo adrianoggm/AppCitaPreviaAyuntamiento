@@ -56,7 +56,7 @@ export class ObtenerDiasMesCitaUseCase {
     const citas = await this.citaRepository.findBetweenDatesForTecnicos(now,oneMonthAhead,tecnicos.map(t => t.id));
     console.log("CITAS:", citas);
 
-    // Conjunto para almacenar los días (YYYY-MM-DD) que tienen al menos una franja con técnicos disponibles.
+    // Conjunto para almacenar los días (YYYY-MM-DD) 
     const diasDisponibles = new Set<string>();
 
     // Se itera por cada día desde hoy hasta un mes adelante.

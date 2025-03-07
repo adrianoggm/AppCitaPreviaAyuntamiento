@@ -4,6 +4,6 @@ import {Usuario} from "../entities/usuario.entity";
 export interface IUsuarioRepository {
     // Crea un nuevo trámite pasandole el formato con el departamento . 
     createUsuario(tramite: CreateUsuarioDto): Promise<Usuario>;
-    findUsuarioByName(nombre: string): Promise<Usuario | null>;
+    findUsuarioByName( nombreusuario: string) : Promise<Usuario|null>;
     //findAllUsuarios( nombreusuario: string) : Promise<Usuario[]|null>;
 }

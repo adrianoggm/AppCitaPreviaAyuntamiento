@@ -13,7 +13,7 @@ import { Schema } from 'mongoose';
 export const CitaSchema = new Schema(
   {
     idtramite: { type: String, required: true },
-    departamento: { type: String, required: true },
+    //departamento: { type: String, required: true },
     estado: { type: String, required: true, enum: ['pendiente', 'confirmada', 'cancelada'] },
     fechahora: { type: String, required: false },
     idtecnico: { type: String, required: false }

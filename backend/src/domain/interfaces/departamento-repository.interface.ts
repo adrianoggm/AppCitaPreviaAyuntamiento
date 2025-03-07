@@ -7,4 +7,5 @@ export interface IDepartamentoRepository {
     findDepartamentoByName( nombredepartamento: string) : Promise<Departamento|null>;
     findDepartamentoByTipoTramite(tipoTramite: string): Promise<Departamento[]> ;
     //findAllUsuarios( nombreusuario: string) : Promise<Usuario[]|null>;
+    
 }
