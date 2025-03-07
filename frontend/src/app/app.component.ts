@@ -12,7 +12,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'AppAyuntamientoSedeElectrónica';
 
   sidebarConfig = {
     tramites: {
