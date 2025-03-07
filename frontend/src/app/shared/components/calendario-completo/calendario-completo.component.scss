@@ -1,0 +1,67 @@
+.calendar-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .month-year {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    width: 14.28%;
+    height: 80px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #afabab;
+  }
+
+  td {
+    cursor: pointer;
+    background-color: #e0e0e0; /* Color base para días del mes actual */
+    
+    &.beyond-window {
+      background-color: #ffffff; /* Blanco para días fuera de la ventana de reserva */
+      cursor: default;
+    }
+    &.past {
+      background-color: #888787; /* Tonalidad más oscura para días pasados */
+      color: #1d1c1c;
+      cursor: default;
+    }
+    &.available {
+      background-color: #c8e6c9; /* Verde para días disponibles dentro del booking window */
+    }
+    &.not-available {
+      background-color: #f15564; /* Rojo para días dentro del booking window que están llenos */
+    }
+    &:hover {
+      background-color: #637563;
+    }
+  }
+
+  td.not-current {
+    color: #aaa;
+    background-color: #f5f5f5;
+    cursor: default;
+  }
+}

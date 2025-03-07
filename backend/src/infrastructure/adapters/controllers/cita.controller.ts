@@ -28,8 +28,8 @@ export class CitaController{
       const horasdisponibles = await this.ObtenerHorasSemanaCitaUseCase.execute(tipoTramite, localizacion);
       // Convertimos el Map a un objeto
       const horas =  Array.from(horasdisponibles.keys());
-      const horasLocales = horas.map(isoStr => new Date(isoStr).toLocaleString());
-     return horasLocales;
+      //const horasLocales = horas.map(isoStr => new Date(isoStr).toLocaleString());
+     return horas;
 
     }
     @Get('dias-disponibles')
@@ -44,10 +44,12 @@ export class CitaController{
       );
   
       // Convertimos el set en array y formateamos cada fecha a DD/MM/YYYY
-      const diasDisponiblesArray = Array.from(diasDisponiblesSet).map((fechaISO) => {
+      
+      /*const diasDisponiblesArray = Array.from(diasDisponiblesSet).map((fechaISO) => {
         const [year, month, day] = fechaISO.split('-');
         return `${day}/${month}/${year}`;
-      });
+      });*/
+      const diasDisponiblesArray = Array.from(diasDisponiblesSet);
   
       return diasDisponiblesArray;
     }

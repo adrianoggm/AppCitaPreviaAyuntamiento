@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DiasDisponiblesComponent } from './shared/components/dias-disponibles/dias-disponibles.component';
+import { CalendarioCompletoComponent } from './shared/components/calendario-completo/calendario-completo.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, DiasDisponiblesComponent],
+  imports: [RouterOutlet, CalendarioCompletoComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

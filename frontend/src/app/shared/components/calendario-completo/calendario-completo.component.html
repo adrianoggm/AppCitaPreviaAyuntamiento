@@ -1,0 +1,29 @@
+<div class="calendar-wrapper">
+  <div class="calendar-header">
+    <button (click)="prevMonth()">&lt;</button>
+    <div class="month-year">{{ currentDate | date: 'MMMM y' }}</div>
+    <button (click)="nextMonth()">&gt;</button>
+  </div>
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th *ngFor="let dayName of dayNames">{{ dayName }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let week of weeks">
+        <td *ngFor="let day of week" 
+            [ngClass]="{
+              'not-current': !day?.isCurrentMonth,
+              'past': day?.date && isPast(day.date!),
+              'available': day?.date && isWithinBookingWindow(day.date!) && isAvailable(day.date!),
+              'not-available': day?.date && isWithinBookingWindow(day.date!) && !isAvailable(day.date!),
+              'beyond-window': day?.date && !isWithinBookingWindow(day.date!) && day?.isCurrentMonth
+            }"
+            (click)="day?.date ? selectDay(day.date!) : null">
+          <span *ngIf="day?.date">{{ day.date!.getDate() }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
