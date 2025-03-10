@@ -1,5 +1,7 @@
 <div class="app-container">
-  <h1>{{ title }}</h1>
+<app-top-bar [appTitle]="'App Ayuntamiento'" [sectionTitle]="'Inicio'"></app-top-bar>
+<router-outlet></router-outlet>
+
   <div class="layout">
     <!-- Sidebar configurable -->
     <app-sidebar [config]="sidebarConfig"></app-sidebar>

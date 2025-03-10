@@ -1,0 +1,25 @@
+<mat-toolbar class="top-bar">
+    <div class="left-section">
+      <!-- Logo del ayuntamiento -->
+      <img [src]="logoUrl" alt="Logo Ayuntamiento" class="logo" />
+
+      <!-- Títulos -->
+      <div class="titles">
+        <span class="app-title">{{ appTitle }}</span>
+        <span class="section-title">{{ sectionTitle }}</span>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="right-section">
+      <!-- Botón de perfil con menú desplegable -->
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Perfil</button>
+        <button mat-menu-item>Configuración</button>
+        <button mat-menu-item>Cerrar sesión</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+  
