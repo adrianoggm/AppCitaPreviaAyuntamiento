@@ -13,8 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 })
 export class TopBarComponent {
   // Puedes pasar estos valores desde el componente padre
+  @Input() ayuntamiento: string = 'Ayuntamiento';
   @Input() appTitle: string = 'Mi Aplicación';
   @Input() sectionTitle: string = 'Sección Actual';
-  logoUrl: string = '../../../assets/images/logo.jpg';
 
 }
