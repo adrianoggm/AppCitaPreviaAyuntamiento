@@ -1,40 +1,34 @@
-<ng-container *ngIf="!isLoading; else loadingTemplate">
-    <div class="calendar-wrapper">
-      <div class="calendar-header">
-        <button (click)="prevWeek()">&lt;</button>
-        <!-- Aquí se muestra un rango de fechas de la semana actual.
-             Puedes crear una propiedad weekRange en el TS que retorne, por ejemplo,
-             "Semana del 03/04/2025 al 09/04/2025" -->
-        <div class="month-year">{{ weekRange }}</div>
-        <button (click)="nextWeek()">&gt;</button>
-      </div>
-      <table class="calendar-table">
-        <thead>
-          <tr>
             <th *ngFor="let dayName of dayNames">{{ dayName }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td *ngFor="let day of week" 
-                [ngClass]="{
-                  'past': day.date && isPast(day.date),
-                  'available': day.date && isWithinBookingWindow(day.date) && day.available,
-                  'not-available': day.date && isWithinBookingWindow(day.date) && !day.available,
-                  'beyond-window': day.date && !isWithinBookingWindow(day.date)
-                }"
-                (click)="day.date ? selectDay(day.date) : null">
-              <span *ngIf="day.date">{{ day.date.getDate() }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </ng-container>
-  
-  <ng-template #loadingTemplate>
-    <div class="loading-container">
-      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-    </div>
-  </ng-template>
-  
+<div *ngIf="!isLoading; else loadingTemplate">
+  <div class="calendar-week">
+    <h3>{{ weekRange }}</h3>
+    <table class="week-table">
+      <thead>
+        <tr>
+          <th>Hora</th>
+          <th *ngFor="let day of weekDays">
+            <!-- Se muestra el día (abreviado) y la fecha -->
+            {{ day | date: 'EEE dd/MM' }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of schedule">
+          <td class="time-label">{{ row.time }}</td>
+          <td *ngFor="let cell of row.cells" 
+              [ngClass]="{'available': cell.available, 'not-available': !cell.available}"
+              (click)="selectSlot(cell.day, row.time)">
+            <!-- Se muestra un texto o se puede dejar vacío según tu diseño -->
+            <span *ngIf="cell.available">Disponible</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading">
+    Cargando...
+  </div>
+</ng-template>
