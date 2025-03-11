@@ -1,4 +1,3 @@
-            <th *ngFor="let dayName of dayNames">{{ dayName }}</th>
 <div *ngIf="!isLoading; else loadingTemplate">
   <div class="calendar-week">
     <h3>{{ weekRange }}</h3>
@@ -7,19 +6,23 @@
         <tr>
           <th>Hora</th>
           <th *ngFor="let day of weekDays">
-            <!-- Se muestra el día (abreviado) y la fecha -->
             {{ day | date: 'EEE dd/MM' }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let row of schedule">
-          <td class="time-label">{{ row.time }}</td>
-          <td *ngFor="let cell of row.cells" 
-              [ngClass]="{'available': cell.available, 'not-available': !cell.available}"
-              (click)="selectSlot(cell.day, row.time)">
-            <!-- Se muestra un texto o se puede dejar vacío según tu diseño -->
-            <span *ngIf="cell.available">Disponible</span>
+          <td class="time-cell">{{ row.time }}</td>
+          <td *ngFor="let cell of row.cells"
+              (click)="!cell.disabled && selectSlot(cell.day, row.time)"
+              [ngClass]="{
+                'available': cell.available && !cell.disabled,
+                'not-available': !cell.available && !cell.disabled,
+                'disabled': cell.disabled
+              }">
+            <span *ngIf="cell.available && !cell.disabled">Disponible</span>
+            <span *ngIf="!cell.available && !cell.disabled">No disponible</span>
+            <span *ngIf="cell.disabled">No disponible</span>
           </td>
         </tr>
       </tbody>
@@ -29,6 +32,6 @@
 
 <ng-template #loadingTemplate>
   <div class="loading">
-    Cargando...
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
 </ng-template>
