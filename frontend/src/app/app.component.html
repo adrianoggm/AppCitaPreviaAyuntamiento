@@ -1,14 +1,19 @@
 <div class="app-container">
-<app-top-bar [ayuntamiento]="'Ayuntamiento de Motril'" [appTitle]="'App Ayuntamiento de Motril Cita electrónica'" [sectionTitle]="'Inicio'"></app-top-bar>
-<router-outlet></router-outlet>
+  <app-top-bar 
+    [ayuntamiento]="'Ayuntamiento de Motril'" 
+    [appTitle]="'App Ayuntamiento de Motril Cita electrónica'" 
+    [sectionTitle]="'Inicio'">
+  </app-top-bar>
 
   <div class="layout">
     <!-- Sidebar configurable -->
     <app-sidebar [config]="sidebarConfig"></app-sidebar>
 
-    <!-- Contenido principal: Calendario y router -->
+    <!-- Contenido principal: Calendarios y router -->
     <div class="content">
       <app-calendario-completo></app-calendario-completo>
+      <app-calendario-semana></app-calendario-semana>
+      <!-- Único router-outlet para contenido dinámico -->
       <router-outlet></router-outlet>
     </div>
   </div>

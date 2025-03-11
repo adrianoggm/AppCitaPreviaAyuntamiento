@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { CalendarioCompletoComponent } from './shared/components/calendario-completo/calendario-completo.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
+import { CalendarioSemanaComponent } from './shared/components/calendario-semana/calendario-semana.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CalendarioCompletoComponent, SidebarComponent,TopBarComponent],
+  imports: [RouterOutlet, CalendarioCompletoComponent, SidebarComponent,TopBarComponent,CalendarioSemanaComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

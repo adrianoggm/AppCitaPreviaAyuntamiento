@@ -1,1 +1,40 @@
-<p>calendario-semana works!</p>
+<ng-container *ngIf="!isLoading; else loadingTemplate">
+    <div class="calendar-wrapper">
+      <div class="calendar-header">
+        <button (click)="prevWeek()">&lt;</button>
+        <!-- Aquí se muestra un rango de fechas de la semana actual.
+             Puedes crear una propiedad weekRange en el TS que retorne, por ejemplo,
+             "Semana del 03/04/2025 al 09/04/2025" -->
+        <div class="month-year">{{ weekRange }}</div>
+        <button (click)="nextWeek()">&gt;</button>
+      </div>
+      <table class="calendar-table">
+        <thead>
+          <tr>
+            <th *ngFor="let dayName of dayNames">{{ dayName }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngFor="let day of week" 
+                [ngClass]="{
+                  'past': day.date && isPast(day.date),
+                  'available': day.date && isWithinBookingWindow(day.date) && day.available,
+                  'not-available': day.date && isWithinBookingWindow(day.date) && !day.available,
+                  'beyond-window': day.date && !isWithinBookingWindow(day.date)
+                }"
+                (click)="day.date ? selectDay(day.date) : null">
+              <span *ngIf="day.date">{{ day.date.getDate() }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </ng-template>
+  
