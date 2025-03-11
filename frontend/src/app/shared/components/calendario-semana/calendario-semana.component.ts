@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CitaService } from '../../../core/services/cita.service';
 
 @Component({
   selector: 'app-calendario-semana',
   standalone: true,
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './calendario-semana.component.html',
   styleUrls: ['./calendario-semana.component.scss']
 })
@@ -89,6 +92,22 @@ export class CalendarioSemanaComponent implements OnInit {
       return `Semana del ${this.formatDateDisplay(start)} al ${this.formatDateDisplay(end)}`;
     }
     return '';
+  }
+
+  // Retorna true si la fecha es anterior a hoy (sin considerar la hora)
+  isPast(date: Date): boolean {
+    const today = new Date();
+    const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return this.formatDate(date) < this.formatDate(todayMid);
+  }
+
+  // Retorna true si la fecha está dentro de la ventana de reserva (hoy hasta 30 días adelante)
+  isWithinBookingWindow(date: Date): boolean {
+    const today = new Date();
+    const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const bookingWindowEnd = new Date(todayMid);
+    bookingWindowEnd.setDate(todayMid.getDate() + 30);
+    return date >= todayMid && date <= bookingWindowEnd;
   }
 
   // Acción al seleccionar un día: aquí podrías abrir un diálogo o mostrar más detalles.
