@@ -12,17 +12,23 @@ import { CitaService } from '../../../core/services/cita.service';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class CalendarioSemanaComponent implements OnInit {
+  // Para navegar entre semanas
+  currentWeek: Date = new Date();
+  // Para pruebas, puedes forzar la fecha de referencia (por ejemplo, en 2025)
+  private referenceDate: Date = new Date(); // Por defecto es la fecha actual
+  // Si pruebas con datos de 2025, descomenta la siguiente línea:
+  // private referenceDate: Date = new Date("2025-03-26T00:00:00.000Z");
+
   weekDays: Date[] = [];
   timeSlots: string[] = [];
-  // La matriz schedule: cada fila tiene la hora y para cada día una celda con disponibilidad
+  // Cada fila: hora y para cada día una celda
   schedule: { time: string, cells: { day: Date, available: boolean, disabled: boolean }[] }[] = [];
-  availableSlots: string[] = []; // Valores ISO de los turnos disponibles
+  availableSlots: string[] = []; // Lista de turnos disponibles (ISO strings)
   isLoading: boolean = true;
 
   constructor(private citaService: CitaService) {}
 
   ngOnInit(): void {
-    // Se espera que el servicio devuelva un array de strings en formato ISO (por ejemplo, "2025-03-11T08:00:00.000Z")
     this.citaService.getHorasDisponibles('Certificados').subscribe({
       next: (data: string[]) => {
         this.availableSlots = data;
@@ -31,7 +37,6 @@ export class CalendarioSemanaComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar horas disponibles:', err);
-        // Si ocurre error, igualmente generamos la estructura de la semana
         this.generateWeekSchedule();
         this.isLoading = false;
       }
@@ -43,22 +48,21 @@ export class CalendarioSemanaComponent implements OnInit {
     this.timeSlots = [];
     this.schedule = [];
     
-    // Calcular el lunes de la semana actual
-    const currentDate = new Date();
+    // Calcular el lunes de la semana actual, usando currentWeek
+    const currentDate = new Date(this.currentWeek);
     let dayOfWeek = currentDate.getDay();
-    // En JavaScript, domingo = 0; si es 0, lo tratamos como 7 para que el lunes sea el inicio
     if (dayOfWeek === 0) { dayOfWeek = 7; }
     const monday = new Date(currentDate);
     monday.setDate(currentDate.getDate() - (dayOfWeek - 1));
 
-    // Generar los 7 días de la semana (lunes a domingo)
+    // Generar los 7 días (lunes a domingo)
     for (let i = 0; i < 7; i++) {
       const day = new Date(monday);
       day.setDate(monday.getDate() + i);
       this.weekDays.push(day);
     }
 
-    // Generar las franjas horarias: de 08:00 a 14:00 (último turno a las 13:30)
+    // Generar franjas horarias: de 08:00 a 14:00 (último turno a las 13:30)
     const startHour = 8;
     const endHour = 14;
     for (let hour = startHour; hour < endHour; hour++) {
@@ -72,16 +76,28 @@ export class CalendarioSemanaComponent implements OnInit {
     for (let time of this.timeSlots) {
       const row = { time, cells: [] as { day: Date, available: boolean, disabled: boolean }[] };
       for (let day of this.weekDays) {
-        // Combinar la fecha del día con la hora del turno
         const [hourStr, minuteStr] = time.split(':');
         const hour = Number(hourStr);
         const minute = Number(minuteStr);
         const slotDate = new Date(day.getFullYear(), day.getMonth(), day.getDate(), hour, minute, 0);
         const slotISO = slotDate.toISOString();
-        // Si el slot existe en availableSlots, se considera disponible
-        const available = this.availableSlots.includes(slotISO);
-        // Aquí puedes agregar lógica para deshabilitar el turno (por ejemplo, fuera de ventana)
-        const disabled = false;
+        
+        let available = false;
+        let disabled = false;
+        // Si el turno es anterior a la fecha de referencia, se deshabilita (gris)
+        if (this.isPast(slotDate)) {
+          disabled = true;
+        } else if (!this.isWithinBookingWindow(slotDate)) {
+          // Si está fuera de la ventana de reserva, se deshabilita (gris)
+          disabled = true;
+        } else {
+          // Dentro de la ventana de reserva: 
+          // Si aparece en availableSlots, está disponible (verde);
+          // si no, es no disponible (rojo)
+          available = this.availableSlots.includes(slotISO);
+          //console.log(this.availableSlots.includes('2025-03-26T09:30:00.000Z'));
+
+        }
         row.cells.push({ day, available, disabled });
       }
       this.schedule.push(row);
@@ -95,7 +111,7 @@ export class CalendarioSemanaComponent implements OnInit {
     return `${hourStr}:${minuteStr}`;
   }
 
-  // Propiedad computada para mostrar el rango de la semana en el header
+  // Rango de la semana para el header
   get weekRange(): string {
     if (this.weekDays.length > 0) {
       const start = this.weekDays[0];
@@ -105,11 +121,36 @@ export class CalendarioSemanaComponent implements OnInit {
     return '';
   }
 
+  // Navegar a la semana anterior
+  prevWeek(): void {
+    this.currentWeek.setDate(this.currentWeek.getDate() - 7);
+    this.generateWeekSchedule();
+  }
+
+  // Navegar a la semana siguiente
+  nextWeek(): void {
+    this.currentWeek.setDate(this.currentWeek.getDate() + 7);
+    this.generateWeekSchedule();
+  }
+
   // Manejo de la selección de un turno
   selectSlot(day: Date, time: string): void {
     const [hourStr, minuteStr] = time.split(':');
     const slotDate = new Date(day.getFullYear(), day.getMonth(), day.getDate(), Number(hourStr), Number(minuteStr), 0);
     console.log("Turno seleccionado:", slotDate.toISOString());
     // Aquí implementar la lógica para reservar el turno
+  }
+
+  // Retorna true si el turno es anterior a la referenceDate
+  isPast(slot: Date): boolean {
+    return slot < this.referenceDate;
+  }
+
+  // Retorna true si el turno está dentro de la ventana de reserva (desde referenceDate hasta +30 días)
+  isWithinBookingWindow(slot: Date): boolean {
+    const todayMid = new Date(this.referenceDate.getFullYear(), this.referenceDate.getMonth(), this.referenceDate.getDate());
+    const bookingWindowEnd = new Date(todayMid);
+    bookingWindowEnd.setDate(todayMid.getDate() + 30);
+    return slot >= todayMid && slot <= bookingWindowEnd;
   }
 }

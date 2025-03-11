@@ -1,50 +1,62 @@
 .calendar-week {
-  h3 {
-    text-align: center;
+  .calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1rem;
+    
+    h3 {
+      margin: 0 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .nav-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   }
-}
+  
+  .week-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
 
-.week-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
 
-  th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-  }
+    th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
 
-  th {
-    background-color: #f5f5f5;
-    font-weight: bold;
-  }
+    .time-cell {
+      font-weight: bold;
+      background-color: #f0f0f0;
+    }
 
-  .time-cell {
-    font-weight: bold;
-    background-color: #f0f0f0;
-  }
+    td.available {
+      background-color: #c8e6c9; /* Verde: Disponible */
+      cursor: pointer;
+    }
 
-  td.available {
-    background-color: #c8e6c9; /* Verde: Disponible */
-    color: #000;
-    cursor: pointer;
-  }
+    td.not-available {
+      background-color: #f15564; /* Rojo: No disponible */
+      cursor: pointer;
+    }
 
-  td.not-available {
-    background-color: #f15564; /* Rojo: No disponible */
-    color: #fff;
-    cursor: pointer;
-  }
+    td.disabled {
+      background-color: #e0e0e0; /* Gris: Pasado o fuera de ventana */
+      cursor: not-allowed;
+    }
 
-  td.disabled {
-    background-color: #e0e0e0; /* Gris: Deshabilitado */
-    color: #888;
-    cursor: not-allowed;
-  }
-
-  td:hover {
-    opacity: 0.9;
+    td:hover {
+      opacity: 0.9;
+    }
   }
 }
 

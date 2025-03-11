@@ -1,6 +1,10 @@
 <div *ngIf="!isLoading; else loadingTemplate">
   <div class="calendar-week">
-    <h3>{{ weekRange }}</h3>
+    <div class="calendar-header">
+      <button class="nav-button" (click)="prevWeek()">&#8249;</button>
+      <h3>{{ weekRange }}</h3>
+      <button class="nav-button" (click)="nextWeek()">&#8250;</button>
+    </div>
     <table class="week-table">
       <thead>
         <tr>
@@ -20,9 +24,7 @@
                 'not-available': !cell.available && !cell.disabled,
                 'disabled': cell.disabled
               }">
-            <span *ngIf="cell.available && !cell.disabled">Disponible</span>
-            <span *ngIf="!cell.available && !cell.disabled">No disponible</span>
-            <span *ngIf="cell.disabled">No disponible</span>
+            <!-- Sin texto; se indica solo con el color -->
           </td>
         </tr>
       </tbody>
