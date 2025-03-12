@@ -1,6 +1,7 @@
+import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   isPlatformBrowser
-} from "./chunk-XJ3QAQFI.js";
+} from "./chunk-C5KUQ6XX.js";
 import {
   ElementRef,
   Injectable,
@@ -12,9 +13,12 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule
-} from "./chunk-5DABNDMX.js";
+} from "./chunk-Z5IWENK5.js";
 
 // node_modules/@angular/cdk/fesm2022/coercion.mjs
+function coerceBooleanProperty(value) {
+  return value != null && `${value}` !== "false";
+}
 function coerceNumberProperty(value, fallbackValue = 0) {
   if (_isNumberValue(value)) {
     return Number(value);
@@ -237,6 +241,7 @@ function _bindEventWithOptions(renderer, target, eventName, callback, options) {
 }
 
 export {
+  coerceBooleanProperty,
   coerceNumberProperty,
   coerceArray,
   coerceCssPixelValue,
@@ -252,4 +257,4 @@ export {
   _isTestEnvironment,
   _bindEventWithOptions
 };
-//# sourceMappingURL=chunk-Y5RC22YQ.js.map
+//# sourceMappingURL=chunk-RXC2KC4O.js.map

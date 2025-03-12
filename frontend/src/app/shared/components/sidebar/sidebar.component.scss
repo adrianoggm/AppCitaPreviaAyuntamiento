@@ -1,42 +1,58 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
 .sidebar {
-    width: 150px;
-    min-height: 100vh;
-    background-color: #2c3e50; // Fondo oscuro
-    padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #ecf0f1; // Texto claro
-  
-    .category {
-      padding: 10px 15px;
+  width: 150px;
+  background-color: #222831;
+  color: #EEEEEE;
+  height: 100vh;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.2);
+
+  .category {
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    
+    &:hover {
+      background-color: #4D525A;
+      box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .category-title {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: block;
+    }
+    
+    .dropdown {
+      background-color: #222831;
       border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-bottom: 10px;
-  
-      &:hover {
-        background-color: #34495e;
-      }
-  
-      // Eliminamos el posicionamiento absoluto para que el dropdown forme parte del flujo normal
-      .dropdown {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
+      padding: 8px 0;
+      margin-top: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      overflow: hidden;
+      
+      .dropdown-item {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
         
-        .dropdown-item {
-          padding: 8px 10px;
-          transition: background-color 0.2s ease;
-  
-          &:hover {
-            background-color: #3c5a73;
-          }
+        &:hover {
+          background-color: #00ADB5;
+          color: #222831;
         }
-      }
-  
-      // Al hacer hover, expandimos el dropdown a una altura fija que cubra su contenido
-      &:hover .dropdown {
-        max-height: 200px; // Ajusta este valor según la altura real de los items
       }
     }
   }
-  
+}
