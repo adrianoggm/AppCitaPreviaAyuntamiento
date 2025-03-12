@@ -1,14 +1,18 @@
 <div *ngIf="!isLoading; else loadingTemplate">
   <div class="calendar-week">
-    <div class="calendar-header">
-      <button class="nav-button" (click)="prevWeek()">&#8249;</button>
-      <h3>{{ weekRange }}</h3>
-      <button class="nav-button" (click)="nextWeek()">&#8250;</button>
-    </div>
+    <mat-toolbar color="primary" class="calendar-header">
+      <button mat-icon-button (click)="prevWeek()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span class="week-title">{{ weekRange }}</span>
+      <button mat-icon-button (click)="nextWeek()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </mat-toolbar>
     <table class="week-table">
       <thead>
         <tr>
-          <th>Hora</th>
+          <th class="time-header">Hora</th>
           <th *ngFor="let day of weekDays">
             {{ day | date: 'EEE dd/MM' }}
           </th>
@@ -17,7 +21,10 @@
       <tbody>
         <ng-container *ngFor="let block of scheduleGrouped">
           <tr>
-            <td class="time-cell" rowspan="2">{{ block.hourLabel }}</td>
+            <!-- Se envuelve el contenido en un div para centrar verticalmente -->
+            <td class="time-cell" rowspan="2">
+              <div class="time-cell-content">{{ block.hourLabel }}</div>
+            </td>
             <td *ngFor="let cell of block.slot1.cells"
                 (click)="!cell.disabled && selectSlot(cell.day, block.slot1.time)"
                 [ngClass]="{
@@ -28,8 +35,7 @@
               <!-- Sin texto; se indica solo por el color -->
             </td>
           </tr>
-          <!-- Se agrega la clase "hour-group-end" para marcar el final del bloque -->
-          <tr *ngIf="block.slot2" class="hour-group-end">
+          <tr *ngIf="block.slot2">
             <td *ngFor="let cell of block.slot2.cells"
                 (click)="!cell.disabled && selectSlot(cell.day, block.slot2.time)"
                 [ngClass]="{

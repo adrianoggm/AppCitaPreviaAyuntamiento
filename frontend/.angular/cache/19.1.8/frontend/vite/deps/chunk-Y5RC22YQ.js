@@ -1,7 +1,6 @@
-import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   isPlatformBrowser
-} from "./chunk-C5KUQ6XX.js";
+} from "./chunk-XJ3QAQFI.js";
 import {
   ElementRef,
   Injectable,
@@ -13,7 +12,7 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule
-} from "./chunk-Z5IWENK5.js";
+} from "./chunk-5DABNDMX.js";
 
 // node_modules/@angular/cdk/fesm2022/coercion.mjs
 function coerceNumberProperty(value, fallbackValue = 0) {
@@ -253,4 +252,4 @@ export {
   _isTestEnvironment,
   _bindEventWithOptions
 };
-//# sourceMappingURL=chunk-REDZH76K.js.map
+//# sourceMappingURL=chunk-Y5RC22YQ.js.map

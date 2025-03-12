@@ -4,7 +4,7 @@ import {
   ScrollDispatcher,
   ScrollingModule,
   ViewportRuler
-} from "./chunk-Q4J7QRP5.js";
+} from "./chunk-2YNWKIV4.js";
 import {
   DOWN_ARROW,
   ENTER,
@@ -24,7 +24,7 @@ import {
   hasModifierKey,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-TDYJ6E5C.js";
+} from "./chunk-PBCNYSTP.js";
 import {
   Platform,
   _bindEventWithOptions,
@@ -33,7 +33,7 @@ import {
   coerceArray,
   coerceCssPixelValue,
   supportsScrollBehavior
-} from "./chunk-REDZH76K.js";
+} from "./chunk-TS4WZGIJ.js";
 import {
   BidiModule,
   Directionality

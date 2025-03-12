@@ -2,7 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CitaService } from '../../../core/services/cita.service';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 interface ScheduleCell {
   day: Date;
   available: boolean;
@@ -23,7 +25,7 @@ interface ScheduleBlock {
 @Component({
   selector: 'app-calendario-semana',
   standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatProgressSpinnerModule,MatIconModule,MatButtonModule,MatToolbarModule],
   templateUrl: './calendario-semana.component.html',
   styleUrls: ['./calendario-semana.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
