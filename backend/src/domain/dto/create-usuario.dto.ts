@@ -17,9 +17,7 @@ import {
 */
 
 export class CreateUsuarioDto{
-    @IsNotEmpty()
-    @IsString()
-    readonly id: string;
+
     
     @IsNotEmpty()
     @IsString()
