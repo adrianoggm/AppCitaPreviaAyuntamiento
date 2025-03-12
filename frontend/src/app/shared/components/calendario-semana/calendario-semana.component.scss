@@ -1,62 +1,51 @@
-.calendar-week {
-  .calendar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
+.week-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: center;
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    vertical-align: middle;
+    height: 30px; // Ajusta la altura según convenga
     
-    h3 {
-      margin: 0 1rem;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    .nav-button {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
   }
-  
-  .week-table {
-    width: 100%;
-    border-collapse: collapse;
+
+  th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  .time-cell {
+    font-weight: bold;
+    background-color: #f0f0f0;
     text-align: center;
+    border-bottom: 2px solid #333;
+  }
 
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-    }
+  td.available {
+    background-color: #c8e6c9; /* Verde: Disponible */
+    cursor: pointer;
+  }
 
-    th {
-      background-color: #f5f5f5;
-      font-weight: bold;
-    }
+  td.not-available {
+    background-color: #f15564; /* Rojo: No disponible */
+    cursor: pointer;
+  }
 
-    .time-cell {
-      font-weight: bold;
-      background-color: #f0f0f0;
-    }
+  td.disabled {
+    background-color: #e0e0e0; /* Gris: Pasado o fuera de ventana */
+    cursor: not-allowed;
+  }
 
-    td.available {
-      background-color: #c8e6c9; /* Verde: Disponible */
-      cursor: pointer;
-    }
+  td:hover {
+    opacity: 0.9;
+  }
 
-    td.not-available {
-      background-color: #f15564; /* Rojo: No disponible */
-      cursor: pointer;
-    }
-
-    td.disabled {
-      background-color: #e0e0e0; /* Gris: Pasado o fuera de ventana */
-      cursor: not-allowed;
-    }
-
-    td:hover {
-      opacity: 0.9;
-    }
+  /* Las filas correspondientes a la franja que termina en :30 tendrán un borde superior más grueso */
+  tr.full-hour {
+    border-top: 2px solid #333;
   }
 }
 
@@ -64,4 +53,7 @@
   text-align: center;
   padding: 2rem;
   font-size: 1.2rem;
+}
+.week-table tbody tr:nth-child(2n) td {
+  border-bottom: 2px solid #333;
 }

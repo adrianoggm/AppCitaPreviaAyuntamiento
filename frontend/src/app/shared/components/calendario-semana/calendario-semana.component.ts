@@ -3,6 +3,23 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CitaService } from '../../../core/services/cita.service';
 
+interface ScheduleCell {
+  day: Date;
+  available: boolean;
+  disabled: boolean;
+}
+
+interface ScheduleRow {
+  time: string;
+  cells: ScheduleCell[];
+}
+
+interface ScheduleBlock {
+  hourLabel: string;
+  slot1: ScheduleRow;
+  slot2: ScheduleRow | null;
+}
+
 @Component({
   selector: 'app-calendario-semana',
   standalone: true,
@@ -21,8 +38,8 @@ export class CalendarioSemanaComponent implements OnInit {
 
   weekDays: Date[] = [];
   timeSlots: string[] = [];
-  // Cada fila: hora y para cada día una celda
-  schedule: { time: string, cells: { day: Date, available: boolean, disabled: boolean }[] }[] = [];
+  schedule: ScheduleRow[] = [];
+  scheduleGrouped: ScheduleBlock[] = []; // Propiedad para agrupar cada 2 franjas (1 hora)
   availableSlots: string[] = []; // Lista de turnos disponibles (ISO strings)
   isLoading: boolean = true;
 
@@ -33,11 +50,13 @@ export class CalendarioSemanaComponent implements OnInit {
       next: (data: string[]) => {
         this.availableSlots = data;
         this.generateWeekSchedule();
+        this.groupSchedule();
         this.isLoading = false;
       },
       error: (err) => {
         console.error('Error al cargar horas disponibles:', err);
         this.generateWeekSchedule();
+        this.groupSchedule();
         this.isLoading = false;
       }
     });
@@ -48,7 +67,7 @@ export class CalendarioSemanaComponent implements OnInit {
     this.timeSlots = [];
     this.schedule = [];
     
-    // Calcular el lunes de la semana actual, usando currentWeek
+    // Calcular el lunes de la semana actual usando currentWeek
     const currentDate = new Date(this.currentWeek);
     let dayOfWeek = currentDate.getDay();
     if (dayOfWeek === 0) { dayOfWeek = 7; }
@@ -72,9 +91,9 @@ export class CalendarioSemanaComponent implements OnInit {
     // Si deseas incluir la franja de 14:00, descomenta la siguiente línea:
     // this.timeSlots.push(this.formatTime(endHour, 0));
 
-    // Construir la matriz de horarios
+    // Construir la matriz de horarios (cada fila corresponde a una franja de 30 minutos)
     for (let time of this.timeSlots) {
-      const row = { time, cells: [] as { day: Date, available: boolean, disabled: boolean }[] };
+      const row: ScheduleRow = { time, cells: [] };
       for (let day of this.weekDays) {
         const [hourStr, minuteStr] = time.split(':');
         const hour = Number(hourStr);
@@ -84,23 +103,32 @@ export class CalendarioSemanaComponent implements OnInit {
         
         let available = false;
         let disabled = false;
-        // Si el turno es anterior a la fecha de referencia, se deshabilita (gris)
+        // Si el turno es anterior a la referenceDate, se deshabilita (gris)
         if (this.isPast(slotDate)) {
           disabled = true;
         } else if (!this.isWithinBookingWindow(slotDate)) {
           // Si está fuera de la ventana de reserva, se deshabilita (gris)
           disabled = true;
         } else {
-          // Dentro de la ventana de reserva: 
-          // Si aparece en availableSlots, está disponible (verde);
-          // si no, es no disponible (rojo)
+          // Dentro de la ventana: si aparece en availableSlots, está disponible (verde);
+          // de lo contrario, se considera no disponible (rojo)
           available = this.availableSlots.includes(slotISO);
-          //console.log(this.availableSlots.includes('2025-03-26T09:30:00.000Z'));
-
         }
         row.cells.push({ day, available, disabled });
       }
       this.schedule.push(row);
+    }
+  }
+
+  private groupSchedule(): void {
+    this.scheduleGrouped = [];
+    // Agrupamos de dos en dos (cada bloque de 1 hora tiene 2 franjas de 30 minutos)
+    for (let i = 0; i < this.schedule.length; i += 2) {
+      const slot1 = this.schedule[i];
+      const slot2 = this.schedule[i + 1] || null;
+      // Usamos el label de la franja :30 para representar la hora (si existe slot2)
+      const hourLabel = slot2 ? slot2.time : slot1.time;
+      this.scheduleGrouped.push({ hourLabel, slot1, slot2 });
     }
   }
 
@@ -125,12 +153,14 @@ export class CalendarioSemanaComponent implements OnInit {
   prevWeek(): void {
     this.currentWeek.setDate(this.currentWeek.getDate() - 7);
     this.generateWeekSchedule();
+    this.groupSchedule();
   }
 
   // Navegar a la semana siguiente
   nextWeek(): void {
     this.currentWeek.setDate(this.currentWeek.getDate() + 7);
     this.generateWeekSchedule();
+    this.groupSchedule();
   }
 
   // Manejo de la selección de un turno

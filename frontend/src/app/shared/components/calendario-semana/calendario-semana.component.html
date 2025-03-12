@@ -15,18 +15,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of schedule">
-          <td class="time-cell">{{ row.time }}</td>
-          <td *ngFor="let cell of row.cells"
-              (click)="!cell.disabled && selectSlot(cell.day, row.time)"
-              [ngClass]="{
-                'available': cell.available && !cell.disabled,
-                'not-available': !cell.available && !cell.disabled,
-                'disabled': cell.disabled
-              }">
-            <!-- Sin texto; se indica solo con el color -->
-          </td>
-        </tr>
+        <ng-container *ngFor="let block of scheduleGrouped">
+          <tr>
+            <td class="time-cell" rowspan="2">{{ block.hourLabel }}</td>
+            <td *ngFor="let cell of block.slot1.cells"
+                (click)="!cell.disabled && selectSlot(cell.day, block.slot1.time)"
+                [ngClass]="{
+                  'available': cell.available && !cell.disabled,
+                  'not-available': !cell.available && !cell.disabled,
+                  'disabled': cell.disabled
+                }">
+              <!-- Sin texto; se indica solo por el color -->
+            </td>
+          </tr>
+          <!-- Se agrega la clase "hour-group-end" para marcar el final del bloque -->
+          <tr *ngIf="block.slot2" class="hour-group-end">
+            <td *ngFor="let cell of block.slot2.cells"
+                (click)="!cell.disabled && selectSlot(cell.day, block.slot2.time)"
+                [ngClass]="{
+                  'available': cell.available && !cell.disabled,
+                  'not-available': !cell.available && !cell.disabled,
+                  'disabled': cell.disabled
+                }">
+              <!-- Sin texto; se indica solo por el color -->
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>
