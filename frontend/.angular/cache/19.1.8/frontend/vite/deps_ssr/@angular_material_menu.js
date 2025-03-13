@@ -4,8 +4,8 @@ import {
   ScrollDispatcher,
   ScrollingModule,
   ViewportRuler
-} from "./chunk-WP7JUAY2.js";
-import "./chunk-P4NJ5RIW.js";
+} from "./chunk-4NZEQZKQ.js";
+import "./chunk-A44F2357.js";
 import {
   DOWN_ARROW,
   ENTER,
@@ -25,7 +25,7 @@ import {
   hasModifierKey,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-5FIPIW4S.js";
+} from "./chunk-H7D2QQFA.js";
 import {
   Platform,
   _bindEventWithOptions,
@@ -34,15 +34,15 @@ import {
   coerceArray,
   coerceCssPixelValue,
   supportsScrollBehavior
-} from "./chunk-RXC2KC4O.js";
+} from "./chunk-G64FR7OE.js";
 import {
   BidiModule,
   Directionality
-} from "./chunk-LTEOTVS6.js";
+} from "./chunk-5S5GS5OR.js";
 import {
   DOCUMENT,
   Location
-} from "./chunk-C5KUQ6XX.js";
+} from "./chunk-5XQGOLN5.js";
 import {
   ANIMATION_MODULE_TYPE,
   ApplicationRef,
@@ -76,7 +76,6 @@ import {
   createComponent,
   inject,
   require_cjs,
-  require_operators,
   setClassMetadata,
   untracked,
   ɵɵInheritDefinitionFeature,
@@ -110,7 +109,10 @@ import {
   ɵɵrestoreView,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-Z5IWENK5.js";
+} from "./chunk-EHFHO6GG.js";
+import {
+  require_operators
+} from "./chunk-DOUXRKQ7.js";
 import {
   __spreadProps,
   __spreadValues,

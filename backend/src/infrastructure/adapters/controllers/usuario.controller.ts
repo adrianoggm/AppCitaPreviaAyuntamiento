@@ -5,6 +5,7 @@ import { Usuario } from "src/domain/entities/usuario.entity";
 import { CreateUsuarioUseCase } from "src/application/use-cases/create-usuario.use-case";
 import { BuscarUsuarioUseCase } from "src/application/use-cases/buscar-usuario.use-case";
 import { LoginUsuarioUseCase } from "src/application/use-cases/login-usuario.use-case";
+import { console } from "inspector";
 
 @Controller("api/usuario")
 export class UsuarioController {
@@ -27,6 +28,7 @@ export class UsuarioController {
   async login(
     @Body() loginUsuarioDto: LoginUsuarioDto
   ): Promise<{ token: string }> {
+    console.log(loginUsuarioDto)
     return await this.loginUsuarioUseCase.execute(loginUsuarioDto);
   }
 

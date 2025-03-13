@@ -3,8 +3,8 @@ import {
   ScrollDispatcher,
   ScrollingModule,
   ViewportRuler
-} from "./chunk-MGFGQWXY.js";
-import "./chunk-RAB2TCCP.js";
+} from "./chunk-H3B4H7NM.js";
+import "./chunk-2EAX6SOJ.js";
 import {
   DOWN_ARROW,
   ENTER,
@@ -24,7 +24,7 @@ import {
   hasModifierKey,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-AO5BEWXE.js";
+} from "./chunk-23QUPSAK.js";
 import {
   Platform,
   _bindEventWithOptions,
@@ -33,15 +33,15 @@ import {
   coerceArray,
   coerceCssPixelValue,
   supportsScrollBehavior
-} from "./chunk-PJHWJ6EK.js";
+} from "./chunk-PHRKYDEK.js";
 import {
   BidiModule,
   Directionality
-} from "./chunk-7J5NEUPI.js";
+} from "./chunk-HB3HQV7J.js";
 import {
   DOCUMENT,
   Location
-} from "./chunk-XJ3QAQFI.js";
+} from "./chunk-EMH7QX43.js";
 import {
   ANIMATION_MODULE_TYPE,
   ApplicationRef,
@@ -65,28 +65,17 @@ import {
   QueryList,
   Renderer2,
   RendererFactory2,
-  Subject,
-  Subscription,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
-  __spreadProps,
-  __spreadValues,
   afterNextRender,
   afterRender,
   booleanAttribute,
   createComponent,
-  filter,
   inject,
   merge,
-  of,
   setClassMetadata,
-  startWith,
-  switchMap,
-  take,
-  takeUntil,
-  takeWhile,
   untracked,
   ɵɵInheritDefinitionFeature,
   ɵɵNgOnChangesFeature,
@@ -119,7 +108,20 @@ import {
   ɵɵrestoreView,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-5DABNDMX.js";
+} from "./chunk-SWHEBQQ5.js";
+import {
+  Subject,
+  Subscription,
+  __spreadProps,
+  __spreadValues,
+  filter,
+  of,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  takeWhile
+} from "./chunk-BALQ4YAT.js";
 
 // node_modules/@angular/cdk/fesm2022/portal.mjs
 function throwNullPortalError() {

@@ -1,0 +1,32 @@
+<div class="login-overlay">
+  <div class="login-container">
+    <h2>Inicia sesión</h2>
+    <p class="subtext">
+      Con tu cuenta de usuario del Ayuntamiento. Esta cuenta estará disponible para otras aplicaciones del Ayuntamiento de Granada.
+    </p>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="nombreusuario">Usuario</label>
+        <input id="nombreusuario" formControlName="nombreusuario" type="email" placeholder="usuario12324" />
+      </div>
+      <div>
+        <label for="contrasena">Contraseña</label>
+        <input id="contrasena" formControlName="contrasena" type="password" placeholder="••••••••••••••••" />
+      </div>
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid">Siguiente</button>
+    </form>
+
+    <div class="info-links">
+      <a href="#">¿Has olvidado tu cuenta?</a>
+      <a href="#">¿No tienes cuenta? Registrate.</a>
+      <a href="#">Más información</a>
+    </div>
+    <div class="login-footer">
+      <img src="assets/images/logoayto-tra.png" alt="Logo" />
+    </div>
+  </div>
+  
+</div>
