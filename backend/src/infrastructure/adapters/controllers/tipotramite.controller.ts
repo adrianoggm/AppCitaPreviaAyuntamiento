@@ -4,7 +4,7 @@ import { CreateTipoTramiteUseCase } from "src/application/use-cases/create-tipot
 import { TipoTramite } from "src/domain/entities/tipotramite.entity";
 
     //TODO AÑADIR  + RUTAS
-@Controller("api/tipotipotramites")
+@Controller("api/tipotipotramite")
 export class TipoTramiteController{
     constructor (
         private readonly  createTipoTramiteUseCase: CreateTipoTramiteUseCase,
