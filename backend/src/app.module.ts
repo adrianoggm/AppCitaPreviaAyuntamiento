@@ -10,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TecnicoModule } from './infrastructure/adapters/controllers/tecnico/tecnico.module';
 import { DepartamentoModule } from './infrastructure/adapters/controllers/departamento/departamento.module';
 import { CitaModule } from './infrastructure/adapters/controllers/cita/cita.module';
-
+import { TipoTramiteModule } from './infrastructure/adapters/controllers/tipotramite/tipotramite.module';
 
 
 const config = ConfigModule.forRoot({
@@ -30,6 +30,7 @@ const config = ConfigModule.forRoot({
     UsuarioModule,
     TecnicoModule,
     DepartamentoModule,
+    TipoTramiteModule,
     CitaModule,
     MongooseModule.forRoot(process.env.DATABASE_URI??"localhost"),
     
