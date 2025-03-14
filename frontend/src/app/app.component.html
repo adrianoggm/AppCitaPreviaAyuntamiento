@@ -1,13 +1,28 @@
-<div class="app-container">
-  <h1>{{ title }}</h1>
-  <div class="layout">
-    <!-- Sidebar configurable -->
-    <app-sidebar [config]="sidebarConfig"></app-sidebar>
+<!-- src/app/app.component.html -->
+<ng-container *ngIf="!isLoginRoute; else authTemplate">
+  <div class="app-container">
+    <app-top-bar 
+      [ayuntamiento]="'Ayuntamiento de Granada'" 
+      [appTitle]="'APP AYUNTAMIENTO DE GRANADA CITA ELECTRÓNICA'" 
+      [sectionTitle]="'Inicio'">
+    </app-top-bar>
 
-    <!-- Contenido principal: Calendario y router -->
-    <div class="content">
-      <app-calendario-completo></app-calendario-completo>
-      <router-outlet></router-outlet>
+    <div class="layout">
+      <!-- Sidebar configurable -->
+      <app-sidebar [config]="sidebarConfig"></app-sidebar>
+
+      <!-- Contenido principal: Calendarios y router -->
+      <div class="content">
+        <app-calendario-completo></app-calendario-completo>
+        <app-calendario-semana></app-calendario-semana>
+        <!-- Único router-outlet para contenido dinámico -->
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
+<app-crear-tramite></app-crear-tramite>
+<ng-template #authTemplate>
+  <!-- Vista para login o rutas de autenticación -->
+  <router-outlet></router-outlet>
+</ng-template>

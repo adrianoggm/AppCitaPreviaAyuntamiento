@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Asegúrate de instalar Angular Material
 import { CitaService } from '../../../core/services/cita.service';
 
 @Component({
   selector: 'app-calendario-completo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './calendario-completo.component.html',
   styleUrls: ['./calendario-completo.component.scss'],
   encapsulation: ViewEncapsulation.Emulated 
@@ -14,9 +15,8 @@ export class CalendarioCompletoComponent implements OnInit {
   currentDate: Date = new Date(); // Mes que se muestra actualmente
   weeks: Array<Array<{ date: Date | null; isCurrentMonth: boolean }>> = [];
   availableDates: string[] = [];
-  
-  
-  dayNames: string[] = [ 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb','Dom'];
+  dayNames: string[] = [ 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom' ];
+  isLoading: boolean = true; // Indicador de carga
 
   constructor(private citaService: CitaService) {}
 
@@ -25,12 +25,16 @@ export class CalendarioCompletoComponent implements OnInit {
     this.citaService.getDiasDisponibles('Certificados').subscribe({
       next: (data) => {
         this.availableDates = data;
+        this.generateCalendar();
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Error al cargar días disponibles:', err);
+        // Incluso en caso de error se genera el calendario
+        this.generateCalendar();
+        this.isLoading = false;
       }
     });
-    this.generateCalendar();
   }
 
   generateCalendar(): void {
@@ -41,9 +45,9 @@ export class CalendarioCompletoComponent implements OnInit {
     const firstDayOfMonth = new Date(year, month, 1);
     const lastDayOfMonth = new Date(year, month + 1, 0);
     const numDays = lastDayOfMonth.getDate();
-
    
-    const startDayIndex = firstDayOfMonth.getDay();
+    // Ajuste para que el primer día (domingo) se alinee correctamente (dependiendo de la localización)
+    const startDayIndex = (firstDayOfMonth.getDay() + 6) % 7;
     let week: Array<{ date: Date | null; isCurrentMonth: boolean }> = [];
 
     // Relleno previo: celdas vacías para los días del mes anterior
@@ -88,7 +92,7 @@ export class CalendarioCompletoComponent implements OnInit {
     return `${year}-${monthString}-${dayString}`;
   }
 
-  // Retorna true si la fecha está en availableDates (es decir, disponible para reserva)
+  // Retorna true si la fecha está en availableDates (disponible para reserva)
   isAvailable(date: Date): boolean {
     return this.availableDates.includes(this.formatDate(date));
   }
@@ -100,7 +104,7 @@ export class CalendarioCompletoComponent implements OnInit {
     return this.formatDate(date) < this.formatDate(todayMid);
   }
 
-  // Retorna true si la fecha está dentro de la ventana de reserva (de hoy a 30 días adelante)
+  // Retorna true si la fecha está dentro de la ventana de reserva (hoy hasta 30 días adelante)
   isWithinBookingWindow(date: Date): boolean {
     const today = new Date();
     const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());

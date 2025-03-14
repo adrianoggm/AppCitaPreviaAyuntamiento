@@ -1,0 +1,25 @@
+<mat-toolbar class="top-bar mat-elevation-z4">
+    <div class="container">
+      <!-- Sección Izquierda: Logo + Títulos -->
+      <div class="left-section">
+        <img src="assets/images/logoayto-tra.png" alt="Logo Ayuntamiento" class="logo">
+        <div class="titles">
+          <div class="app-title">{{ appTitle }}</div>
+          <div class="section-title">{{ sectionTitle }}</div>
+        </div>
+      </div>
+  
+      <!-- Sección Derecha: Botón Circular de Perfil -->
+      <div class="right-section">
+        <button class="circular-button" [matMenuTriggerFor]="menu" aria-label="Cuenta">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Perfil</button>
+          <button mat-menu-item>Configuración</button>
+          <button mat-menu-item>Cerrar sesión</button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar>
+  

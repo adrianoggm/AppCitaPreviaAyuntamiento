@@ -1,0 +1,59 @@
+<div *ngIf="!isLoading; else loadingTemplate">
+  <div class="calendar-week">
+    <mat-toolbar color="primary" class="calendar-header">
+      <button mat-icon-button (click)="prevWeek()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span class="week-title">{{ weekRange }}</span>
+      <button mat-icon-button (click)="nextWeek()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </mat-toolbar>
+    <table class="week-table">
+      <thead>
+        <tr>
+          <th class="time-header">Hora</th>
+          <th *ngFor="let day of weekDays">
+            {{ day | date: 'EEE dd/MM' }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let block of scheduleGrouped">
+          <tr>
+            <!-- Se envuelve el contenido en un div para centrar verticalmente -->
+            <td class="time-cell" rowspan="2">
+              <div class="time-cell-content">{{ block.hourLabel }}</div>
+            </td>
+            <td *ngFor="let cell of block.slot1.cells"
+                (click)="!cell.disabled && selectSlot(cell.day, block.slot1.time)"
+                [ngClass]="{
+                  'available': cell.available && !cell.disabled,
+                  'not-available': !cell.available && !cell.disabled,
+                  'disabled': cell.disabled
+                }">
+              <!-- Sin texto; se indica solo por el color -->
+            </td>
+          </tr>
+          <tr *ngIf="block.slot2">
+            <td *ngFor="let cell of block.slot2.cells"
+                (click)="!cell.disabled && selectSlot(cell.day, block.slot2.time)"
+                [ngClass]="{
+                  'available': cell.available && !cell.disabled,
+                  'not-available': !cell.available && !cell.disabled,
+                  'disabled': cell.disabled
+                }">
+              <!-- Sin texto; se indica solo por el color -->
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-template>

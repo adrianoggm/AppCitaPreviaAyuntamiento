@@ -1,0 +1,15 @@
+<!-- src/app/features/crear-tramite/crear-tramite.component.html -->
+<div class="crear-tramite-container">
+  <h2>Crear Trámite</h2>
+  <p class="subtext">Selecciona el tipo de trámite que deseas crear.</p>
+  <form [formGroup]="createTramiteForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="tipoTramite">Tipo de Trámite</label>
+      <input id="tipoTramite" formControlName="tipoTramite" type="text" placeholder="Ej. CERTIFICADO" />
+    </div>
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+    <button type="submit" [disabled]="createTramiteForm.invalid">Crear Trámite</button>
+  </form>
+</div>

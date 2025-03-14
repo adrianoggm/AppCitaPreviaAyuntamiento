@@ -1,0 +1,88 @@
+@use 'sass:color';
+
+.week-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #fff;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: middle;
+    height: 40px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  th {
+    background-color: #fafafa;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  /* Columna de horas con ancho fijo y borde derecho marcado */
+  .time-header,
+  .time-cell {
+    width: 70px;
+    border-right: 2px solid #ccc;
+  }
+
+  .time-cell {
+    background-color: #f9f9f9;
+    padding: 0;
+  }
+
+  .time-cell-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  /* Colores ajustados: verde más claro y rojo medio */
+  td.available {
+    background-color: #a4e4a7; /* Verde más claro */
+    cursor: pointer;
+  }
+
+  td.not-available {
+    background-color: #f08383; /* Rojo medio */
+    cursor: pointer;
+  }
+
+  td.disabled {
+    background-color: #eceff1; /* Gris azulado claro */
+    cursor: not-allowed;
+  }
+
+  /* Efecto hover: escalado y oscurecimiento sutil utilizando color.adjust */
+  td.available:hover {
+    background-color: color.adjust(#88cf8a, $lightness: -5%);
+    transform: scale(1.02);
+  }
+
+  td.not-available:hover {
+    background-color: color.adjust(#c76363, $lightness: -5%);
+    transform: scale(1.02);
+  }
+
+  td.disabled:hover {
+    background-color: color.adjust(#eceff1, $lightness: -5%);
+  }
+
+  td:hover {
+    transform: scale(1.02);
+  }
+
+  /* Se refuerza la separación entre bloques (cada hora, que consta de 2 medias horas) */
+  tbody tr:nth-child(2n) td {
+    border-bottom: 3px solid #999;
+  }
+}

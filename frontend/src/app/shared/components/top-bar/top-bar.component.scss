@@ -1,0 +1,84 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+.top-bar {
+  background: linear-gradient(90deg, #222831, #393E46);
+  color: #EEEEEE;
+  padding: 0;
+  min-height: 100px; 
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .left-section {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+
+    .logo {
+      height: 80px; 
+      margin-right: 16px;
+    }
+
+    .titles {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      font-family: 'Roboto', sans-serif;
+
+      .ayuntamiento {
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+      }
+      .app-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      .section-title {
+        font-size: 1rem;
+        font-weight: 300;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .right-section {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+
+    .circular-button {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #4D525A;  // Color modificado a un tono más claro
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-left: 8px;
+
+      mat-icon {
+        font-size: 24px;
+        color: #EEEEEE;
+      }
+
+      &:hover {
+        background-color: #00ADB5;
+        transform: scale(1.1);
+      }
+    }
+  }
+}

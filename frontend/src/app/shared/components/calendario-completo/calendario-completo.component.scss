@@ -1,5 +1,5 @@
 .calendar-wrapper {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 1rem;
 
@@ -55,9 +55,9 @@
       &:hover {
         // Para evitar que el hover sobrescriba a los días disponibles o no disponibles, 
         // aplicamos el hover solo a los que no tengan esas clases.
-        &:not(.available):not(.not-available) {
+        
           background-color: #637563;
-        }
+        
       }
     }
 
