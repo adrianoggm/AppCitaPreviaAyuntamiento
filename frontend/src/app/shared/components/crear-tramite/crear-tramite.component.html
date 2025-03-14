@@ -1,45 +1,15 @@
 <!-- src/app/features/crear-tramite/crear-tramite.component.html -->
 <div class="crear-tramite-container">
-    <h2>Crear Trámite</h2>
-    <p class="subtext">Introduce los datos del trámite y pulsa "Crear Trámite".</p>
-    <form [formGroup]="createTramiteForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="nombre">Nombre del trámite</label>
-        <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre del trámite" />
-      </div>
-      <div class="form-group">
-        <label for="estado">Estado</label>
-        <input id="estado" formControlName="estado" type="text" placeholder="Ej. Pendiente, En proceso, Finalizado" />
-      </div>
-      <div class="form-group">
-        <label for="idusuario">ID del Usuario</label>
-        <input id="idusuario" formControlName="idusuario" type="text" placeholder="ID del usuario" />
-      </div>
-      <div class="form-group">
-        <label for="codigo">Código</label>
-        <input id="codigo" formControlName="codigo" type="text" placeholder="Código de referencia" />
-      </div>
-      <div class="form-group">
-        <label for="tipoTramite">Tipo de Trámite</label>
-        <input id="tipoTramite" formControlName="tipoTramite" type="text" placeholder="Tipo de trámite" />
-      </div>
-      <div class="form-group">
-        <label for="observaciones">Observaciones</label>
-        <textarea id="observaciones" formControlName="observaciones" placeholder="Observaciones adicionales"></textarea>
-      </div>
-      <!-- Sección para documentos -->
-      <div class="form-group" formArrayName="documentos">
-        <label>Documentos</label>
-        <div *ngFor="let docCtrl of documentos.controls; let i=index" class="documento-item">
-          <input [formControlName]="i" type="text" placeholder="Documento" />
-          <button type="button" (click)="removeDocumento(i)">Eliminar</button>
-        </div>
-        <button type="button" (click)="addDocumento()">Añadir Documento</button>
-      </div>
-      <div *ngIf="errorMessage" class="error">
-        {{ errorMessage }}
-      </div>
-      <button type="submit" [disabled]="createTramiteForm.invalid">Crear Trámite</button>
-    </form>
-  </div>
-  
+  <h2>Crear Trámite</h2>
+  <p class="subtext">Selecciona el tipo de trámite que deseas crear.</p>
+  <form [formGroup]="createTramiteForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="tipoTramite">Tipo de Trámite</label>
+      <input id="tipoTramite" formControlName="tipoTramite" type="text" placeholder="Ej. CERTIFICADO" />
+    </div>
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+    <button type="submit" [disabled]="createTramiteForm.invalid">Crear Trámite</button>
+  </form>
+</div>
