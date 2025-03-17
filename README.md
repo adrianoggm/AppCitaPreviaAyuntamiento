@@ -4,9 +4,15 @@ Este repositorio contiene la aplicación genérica de cita previa para ayuntamie
 
 - **Back-end:**  
   Implementado en TypeScript utilizando NestJS y siguiendo una arquitectura hexagonal para mantener una clara separación de responsabilidades (dominio, aplicación, infraestructura y compartido). Se utiliza MongoDB para la persistencia, con Mongoose para el manejo de modelos y validaciones, y se implementan técnicas de encriptación para datos sensibles.
-
+ 
 - **Front-end:**  
   Implementado en Angular 19. La aplicación consume la API del back-end para gestionar las operaciones de cita previa.
 
 ---
+
+
+Entidades: 
+Se define el projecto bajo las siguientes entidades siguiendo los siguientes esquemas bajo la base de datos.
+
+
 
