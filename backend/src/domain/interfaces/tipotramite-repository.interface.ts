@@ -5,4 +5,5 @@ export interface ITipoTramiteRepository {
 
     CreateTipoTramite(tramite: CreateTipoTramiteDto): Promise<TipoTramite>;
     getAllTipoTramiteNombres(): Promise<string[]>;
+    findAll(): Promise<TipoTramite[]>;
 }

@@ -17,4 +17,8 @@ export class TipoTramiteRepository implements ITipoTramiteRepository {
     const results = await this.tramiteModel.find({}, 'nombretipotramite').exec();
     return results.map(item => item.nombretipotramite);
   }
+
+  async findAll(): Promise<TipoTramite[]> {
+    return this.tramiteModel.find().exec();
+  }
 }
