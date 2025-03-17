@@ -21,7 +21,7 @@ export const TipoTramiteSchema = new Schema({
     recursos: {type: String},  
     normativa: {type: String, required: true},
     documentacion: {type: String, required: true}, 
-
+    nombretramites: {type: [String], required: true}, 
 });
 
 TipoTramiteSchema.set('toJSON', { virtuals: true });

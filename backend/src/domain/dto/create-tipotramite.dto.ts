@@ -42,5 +42,9 @@ export class CreateTipoTramiteDto {
     @IsString()
     readonly documentacion: string;
 
+    @IsNotEmpty()
+    @IsString({each: true}) //buscar como hacer que cada uno sea un string
+    readonly nombretramites: string[];
+    
 
 }
