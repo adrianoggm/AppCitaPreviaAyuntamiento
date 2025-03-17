@@ -5,7 +5,7 @@ import { GetTipoTramiteNombresUseCase } from "src/application/use-cases/buscar-t
 import { TipoTramite } from "src/domain/entities/tipotramite.entity";
 import {GetNombreTramitesTipoTramitesUseCase} from "src/application/use-cases/buscar-nombre-tramites-tipotramites.use-case";
     //TODO AÑADIR  + RUTAS
-@Controller("api/tipotipotramite")
+@Controller("api/tipotramite")
 export class TipoTramiteController{
     constructor (
         private readonly  createTipoTramiteUseCase: CreateTipoTramiteUseCase,
