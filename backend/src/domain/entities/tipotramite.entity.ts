@@ -18,7 +18,7 @@ export class TipoTramite {
         public recursos: string, 
         public documentacion: string,
         public observaciones: string,
-       
+        public nombretramites: string[],
     ){
         
 
