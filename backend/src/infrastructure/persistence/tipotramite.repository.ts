@@ -13,4 +13,8 @@ export class TipoTramiteRepository implements ITipoTramiteRepository {
     const createdTipoTramite = new this.tramiteModel(tramite);
     return createdTipoTramite.save();
   }
+  async getAllTipoTramiteNombres(): Promise<string[]> {
+    const results = await this.tramiteModel.find({}, 'nombretipotramite').exec();
+    return results.map(item => item.nombretipotramite);
+  }
 }
