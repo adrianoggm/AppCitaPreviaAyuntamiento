@@ -4,17 +4,29 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TramiteService } from '../../../core/services/tramite.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-crear-tramite',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './crear-tramite.component.html',
   styleUrls: ['./crear-tramite.component.scss']
 })
 export class CrearTramiteComponent implements OnInit {
   createTramiteForm!: FormGroup;
   errorMessage: string = '';
+
+  // Mapa obtenido desde el backend: { nombreTramite: nombretipotramite }
+  tramitesMap: { [key: string]: string } = {};
+  // Lista de sugerencias filtradas (keys del mapa)
+  filteredTramites: string[] = [];
+  // Observable para la búsqueda (se asigna en ngOnInit)
+  filteredTramites$!: Observable<string[]>;
+  // Bandera para controlar si el input está enfocado
+  isInputFocused: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -23,15 +35,69 @@ export class CrearTramiteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Inicializa el formulario con el campo tipoTramite para la búsqueda
     this.createTramiteForm = this.fb.group({
-      // Únicamente se selecciona el tipo de trámite desde el front-end.
       tipoTramite: ['', Validators.required]
     });
+
+    // Se obtiene el mapa de nombretramites a través del servicio
+    this.tramiteService.getNombreTramitesMap().subscribe({
+      next: (mapData) => {
+        this.tramitesMap = mapData;
+        const keys = Object.keys(mapData);
+
+        // Configura el observable para filtrar sugerencias conforme se escribe
+        this.filteredTramites$ = this.createTramiteForm.get('tipoTramite')!.valueChanges.pipe(
+          startWith(''),
+          map((value: string) => this.filterTramites(value, keys))
+        );
+
+        // Actualiza la lista filtrada para usarla directamente en el template
+        this.createTramiteForm.get('tipoTramite')!.valueChanges.pipe(
+          startWith(''),
+          map((value: string) => this.filterTramites(value, keys))
+        ).subscribe(filtered => {
+          this.filteredTramites = filtered;
+        });
+      },
+      error: (err) => {
+        console.error('Error al obtener el mapa de trámites:', err);
+      }
+    });
+  }
+
+  /**
+   * Controla el evento de focus del input.
+   */
+  onFocus(): void {
+    this.isInputFocused = true;
+  }
+
+  /**
+   * Controla el evento de blur del input.
+   * Se usa un setTimeout para permitir el click en las sugerencias.
+   */
+  onBlur(): void {
+    setTimeout(() => {
+      this.isInputFocused = false;
+    }, 200);
+  }
+
+  /**
+   * Filtra los nombres de trámite (keys del mapa) en función del valor ingresado.
+   * Si el input está vacío, retorna un array vacío.
+   */
+  private filterTramites(value: string, keys: string[]): string[] {
+    if (!value.trim()) {
+      return [];
+    }
+    const filterValue = value.toLowerCase();
+    return keys.filter(tramite => tramite.toLowerCase().includes(filterValue));
   }
 
   onSubmit(): void {
     if (this.createTramiteForm.valid) {
-      // El servicio completará los demás campos (idusuario, estado, código, observaciones y documentos)
+      // El servicio completará los demás campos (idusuario, estado, código, observaciones, documentos, etc.)
       this.tramiteService.createTramite(this.createTramiteForm.value).subscribe({
         next: (res) => {
           console.log('Trámite creado:', res);
