@@ -13,11 +13,6 @@
 export class TipoTramite {
     constructor(
         public nombretipotramite:string,
-        public presentacion: string,
-        public organogestor: string,
-        public recursos: string, 
-        public documentacion: string,
-        public observaciones: string,
         public nombretramites: string[],
     ){
         

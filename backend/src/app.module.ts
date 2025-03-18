@@ -11,7 +11,7 @@ import { TecnicoModule } from './infrastructure/adapters/controllers/tecnico/tec
 import { DepartamentoModule } from './infrastructure/adapters/controllers/departamento/departamento.module';
 import { CitaModule } from './infrastructure/adapters/controllers/cita/cita.module';
 import { TipoTramiteModule } from './infrastructure/adapters/controllers/tipotramite/tipotramite.module';
-
+import { TipoTramiteMetadatoModule } from './infrastructure/adapters/controllers/tipotramitemetadato/tipotramitemetadato.module';
 
 const config = ConfigModule.forRoot({
   envFilePath: ['local.env', '.env'],
@@ -32,6 +32,7 @@ const config = ConfigModule.forRoot({
     DepartamentoModule,
     TipoTramiteModule,
     CitaModule,
+    TipoTramiteMetadatoModule,
     MongooseModule.forRoot(process.env.DATABASE_URI??"localhost"),
     
   ],
