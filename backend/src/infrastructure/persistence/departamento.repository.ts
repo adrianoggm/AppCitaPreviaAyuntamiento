@@ -24,18 +24,18 @@ export class DepartamentoRepository implements IDepartamentoRepository {
         */
      
     
-      async findDepartamentoByName(nombredepartamento: string): Promise<Departamento | null> {
+      async findDepartamentoByName(nombre: string): Promise<Departamento | null> {
         /*console.log("Buscando en la colección:", this.departamentoModel.collection.name);
-        console.log("Valor de nombredepartamento recibido:", nombredepartamento);
-        if(nombredepartamento!='departamento1232454'){
-          console.log("Raro",typeof nombredepartamento);
+        console.log("Valor de nombre recibido:", nombre);
+        if(nombre!='departamento1232454'){
+          console.log("Raro",typeof nombre);
         }
-        const departamentos = await this.departamentoModel.find({nombredepartamento: 'departamento1232454' }).exec();
+        const departamentos = await this.departamentoModel.find({nombre: 'departamento1232454' }).exec();
         console.log(departamentos);
-        //console.log(departamentos[0]["nombredepartamento"]);
+        //console.log(departamentos[0]["nombre"]);
         */
-        const departamentoDoc = await this.departamentoModel.findOne({ nombredepartamento }).exec();
-        //console.log("Nombre ",nombredepartamento)
+        const departamentoDoc = await this.departamentoModel.findOne({ nombre }).exec();
+        //console.log("Nombre ",nombre)
         //console.log("Resultado de la consulta:", departamentoDoc);
         return departamentoDoc ? departamentoDoc.toJSON() : null;
       }

@@ -20,8 +20,8 @@ export class DepartamentoController{
     }
     //Busco por nombre de usario
     @Get('/buscar')
-    async findDepartamentoByName(@Query('nombredepartamento') nombredepartamento:string): Promise <Departamento|null>{
-        return await this.buscarDepartamentoUseCase.execute(nombredepartamento);
+    async findDepartamentoByName(@Query('nombre') nombre:string): Promise <Departamento|null>{
+        return await this.buscarDepartamentoUseCase.execute(nombre);
     }
     @Get('/buscar-por-tipo')
     async findDepartamentoByTipoTramite(@Query('tipoTramite') tipoTramite:string): Promise <Departamento[]>{

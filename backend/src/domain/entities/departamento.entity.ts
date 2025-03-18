@@ -1,8 +1,8 @@
 /*
          Departamento 
             iddepartamento
-            nombredepartamento
-            codigodepartamento:
+            nombre
+            codigo:
             TipoTramites asociados :  "  . .. .. .. .. .. . . .  .. . . "
         
         //  Departamento  
@@ -11,8 +11,8 @@ export class Departamento{
 
     constructor(
         public id: string,
-        public readonly nombredepartamento: string,
-        public codigodepartamento: string,
+        public readonly nombre: string,
+        public codigo: string,
         public TipoTramites:string[],
 
     ){}

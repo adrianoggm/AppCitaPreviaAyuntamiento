@@ -32,7 +32,7 @@ export class ObtenerDiasMesCitaUseCase {
 
     // Según la localización, buscar técnicos de los departamentos correspondientes
     console.log("DEPARTAMENTOS A BUSCAR", departamentos);
-    const codigosDepartamento = departamentos.map(dep => dep.codigodepartamento);
+    const codigosDepartamento = departamentos.map(dep => dep.codigo);
     console.log("CODIGOS:", codigosDepartamento);
     
     let tecnicos;

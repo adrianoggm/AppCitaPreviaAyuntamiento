@@ -49,8 +49,15 @@ UsuarioSchema.pre('save', async function (next) {
     next();
   });
 // Crea una propiedad virtual "id" que devuelve el _id en formato string
-UsuarioSchema.virtual('id').get(function(){
-    return this._id.toHexString();
-  });
+UsuarioSchema.virtual('id').get(function() {
+  return this._id.toHexString();
+});
   
-UsuarioSchema.set('toJSON', { virtuals: true });
+UsuarioSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    delete ret._id;
+    return ret;
+  }
+});

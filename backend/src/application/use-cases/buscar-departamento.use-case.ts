@@ -11,9 +11,9 @@ export class BuscarDepartamentoUseCase {
         private readonly departamentoRepository: IDepartamentoRepository,
     ){}
 
-    async execute(nombredepartamento: string): Promise<Departamento | null> {
-        console.log("Buscando departamento con nombre:", nombredepartamento);
-        const departamento = await this.departamentoRepository.findDepartamentoByName(nombredepartamento);
+    async execute(nombre: string): Promise<Departamento | null> {
+        console.log("Buscando departamento con nombre:", nombre);
+        const departamento = await this.departamentoRepository.findDepartamentoByName(nombre);
         console.log("Departamento encontrado:", departamento);
         return departamento;
       }

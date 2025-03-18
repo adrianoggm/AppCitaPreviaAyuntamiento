@@ -26,4 +26,11 @@ CitaSchema.virtual('id').get(function () {
   return this._id.toHexString();
 });
 
-CitaSchema.set('toJSON', { virtuals: true });
+CitaSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    delete ret._id;
+    return ret;
+  }
+});

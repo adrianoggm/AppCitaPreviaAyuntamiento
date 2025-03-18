@@ -7,7 +7,7 @@ import {
          Departamento 
             iddepartamento
             nombredepartamento
-            codigodepartamento:
+            codigo:
             TipoTramites asociados :  "  . .. .. .. .. .. . . .  .. . . "
         
         //  Departamento  
@@ -21,11 +21,11 @@ export class CreateDepartamentoDto{
     
     @IsNotEmpty()
     @IsString()
-    nombredepartamento: string;
+    nombre: string;
 
     @IsNotEmpty()
     @IsString()
-    codigodepartamento : string;
+    codigo : string;
 
     @IsOptional()
     @IsString({each: true}) //buscar como hacer que cada uno sea un string
