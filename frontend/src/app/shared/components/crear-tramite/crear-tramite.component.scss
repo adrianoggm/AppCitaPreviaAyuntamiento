@@ -1,4 +1,4 @@
-// src/app/features/crear-tramite/crear-tramite.component.scss
+/* src/app/features/crear-tramite/crear-tramite.component.scss */
 .crear-tramite-container {
   max-width: 600px;
   margin: 2rem auto;
@@ -8,6 +8,7 @@
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  position: relative;
 
   h2 {
     font-size: 1.8rem;
@@ -28,6 +29,7 @@
 
     .form-group {
       text-align: left;
+      position: relative;
 
       label {
         display: block;
@@ -50,6 +52,30 @@
           border-color: #595a5a;
           outline: none;
           box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+      }
+
+      .autocomplete-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #dadce0;
+        border-top: none;
+        max-height: 200px;
+        overflow-y: auto;
+        position: absolute;
+        width: 100%;
+        background-color: #fff;
+        z-index: 10;
+
+        li {
+          padding: 0.5rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: #f1f3f4;
+          }
         }
       }
     }

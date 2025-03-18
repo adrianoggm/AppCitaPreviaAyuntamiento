@@ -5,7 +5,19 @@
   <form [formGroup]="createTramiteForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="tipoTramite">Tipo de Trámite</label>
-      <input id="tipoTramite" formControlName="tipoTramite" type="text" placeholder="Ej. CERTIFICADO" />
+      <input id="tipoTramite"
+             formControlName="tipoTramite"
+             type="text"
+             placeholder="Ej. CERTIFICADO"
+             (focus)="onFocus()"
+             (blur)="onBlur()" />
+      <!-- Lista de sugerencias: solo se muestra si el input está enfocado y hay sugerencias -->
+      <ul *ngIf="isInputFocused && filteredTramites.length > 0" class="autocomplete-list">
+        <li *ngFor="let tramite of filteredTramites" 
+            (mousedown)="createTramiteForm.get('tipoTramite')?.setValue(tramite)">
+          {{ tramite }}
+        </li>
+      </ul>
     </div>
     <div *ngIf="errorMessage" class="error">
       {{ errorMessage }}

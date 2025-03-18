@@ -54,7 +54,7 @@ export class CreateCitaUseCase {
             throw new NotFoundException('No se encontraron departamentos para el tipo de trámite indicado.');
         }
         // Extraer los códigos de departamento
-        const codigosDepartamento = departamentos.map(dep => dep.codigodepartamento);
+        const codigosDepartamento = departamentos.map(dep => dep.codigo);
         console.log("CODIGOS DEP:", codigosDepartamento);        
 
         // Busco  técnicos en base a los códigos de departamento  y localizacoon

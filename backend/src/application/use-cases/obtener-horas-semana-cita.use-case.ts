@@ -32,7 +32,7 @@ export class ObtenerHorasSemanaCitaUseCase {
     console.log("DEPARTAMENTOS A BUSCAR", departamentos);
   
     // Extraer los códigos de departamento
-    const codigosDepartamento = departamentos.map(dep => dep.codigodepartamento);
+    const codigosDepartamento = departamentos.map(dep => dep.codigo);
     console.log("CODIGOS:", codigosDepartamento);
   
     // Buscar técnicos en base a los departamentos (y localización, si se proporciona)

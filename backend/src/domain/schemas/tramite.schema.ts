@@ -35,4 +35,13 @@ export const TramiteSchema = new Schema({
 TramiteSchema.virtual('id').get(function() {
     return this._id.toHexString();
   });
-TramiteSchema.set('toJSON', { virtuals: true });
+  
+TramiteSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) {
+      delete ret._id;
+      return ret;
+    }
+  });
+  

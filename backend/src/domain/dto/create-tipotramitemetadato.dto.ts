@@ -1,5 +1,5 @@
 /*
-    Clase Tipotrámite  tiene asociados los siguientes elementos :
+    Clase Tipotrámitemetadot  tiene asociados los siguientes elementos :
 
     -nombretipotramite: string     nombre del tramite
     -presentacion: string       estado del trámite (pendiente,confirmado, en proceso,finalizado)
@@ -17,14 +17,30 @@ import {
 
 } from 'class-validator';
 
-export class CreateTipoTramiteDto { 
+export class CreateTipoTramiteMetadatoDto { 
     @IsNotEmpty()
     @IsString()
-    readonly nombretipotramite: string;
+    readonly nombre: string;
 
     @IsNotEmpty()
-    @IsString({each: true})
-    readonly nombretramites: string[];
+    @IsString()
+    readonly presentacion: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly organogestor: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly recursos: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly normativa: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly documentacion: string;
     
 
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment'; 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,5 +20,10 @@ export class TramiteService {
     // - código (generado a partir de las 3 letras iniciales en mayúscula + número aleatorio)
     // - observaciones y documentos (cadena vacía o array vacío)
     return this.http.post<any>(this.apiUrl, tramite);
+  }
+
+  // Método para obtener el mapa de nombretramites => nombretipotramite
+  getNombreTramitesMap(): Observable<{ [key: string]: string }> {
+    return this.http.get<{ [key: string]: string }>(`${environment.apiUrl}/tipotramite/nombre-tramites-tipotramites`);
   }
 }
