@@ -4,7 +4,7 @@
   margin: 2rem auto;
   padding: 2rem;
   background-color: #fff;
-  border: 2px solid #1a73e8;
+  border: 2px solid #b1b6bd;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -132,6 +132,35 @@
       &:hover {
         background-color: #1669c1;
       }
+    }
+  }
+}
+.report-container {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  border: 1px solid #dadce0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  text-align: left;
+
+  h2 {
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #202124;
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    
+    strong {
+      display: inline-block;
+      width: 140px; /* ancho fijo para alinear las etiquetas */
+      color: #222831;
     }
   }
 }

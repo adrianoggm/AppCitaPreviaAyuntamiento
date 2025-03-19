@@ -1,4 +1,3 @@
-<!-- src/app/features/crear-tramite/crear-tramite.component.html -->
 <div class="crear-tramite-container">
   <form [formGroup]="createTramiteForm" (ngSubmit)="onSubmit()">
     <!-- Sección de búsqueda del tipo trámite metadato -->
@@ -24,10 +23,17 @@
       </li>
     </ul>
 
-    <!-- Sección para mostrar la plantilla y opción de creación del trámite -->
+    <!-- Sección para mostrar la plantilla en formato "hoja de presentación" -->
     <div class="template-container" *ngIf="selectedTemplate">
-      <h3>Plantilla del trámite</h3>
-      <pre>{{ selectedTemplate | json }}</pre>
+      <h3>Plantilla del Trámite</h3>
+      <div class="report-container">
+        <h2>{{ selectedTemplate.nombre }}</h2>
+        <p><strong>Presentación:</strong> {{ selectedTemplate.presentacion }}</p>
+        <p><strong>Órgano Gestor:</strong> {{ selectedTemplate.organogestor }}</p>
+        <p><strong>Recursos:</strong> {{ selectedTemplate.recursos }}</p>
+        <p><strong>Normativa:</strong> {{ selectedTemplate.normativa }}</p>
+        <p><strong>Documentación Necesaria:</strong> {{ selectedTemplate.documentacion }}</p>
+      </div>
       <button type="submit">Crear Trámite</button>
     </div>
   </form>
