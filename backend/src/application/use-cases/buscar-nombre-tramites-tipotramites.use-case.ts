@@ -21,13 +21,14 @@ export class GetNombreTramitesTipoTramitesUseCase {
     const tipoTramites: TipoTramite[] = await this.tipoTramiteRepository.findAll();
     //nombretramites nombretipotramite
     // Se construye el mapa iterando cada registro y sus nombres asociados
+    console.log("tipoTramites",tipoTramites);
     const map: { [nombreTramite: string]: string } = {};
     tipoTramites.forEach(tipo => {
       tipo.nombretramites.forEach(nombre => {
         map[nombre] = tipo.nombretipotramite;
       });
     });
-
+    console.log("MAP",map);
     return map;
   }
 }

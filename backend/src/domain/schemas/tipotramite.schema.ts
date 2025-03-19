@@ -16,11 +16,6 @@ import {Schema} from 'mongoose';
 
 export const TipoTramiteSchema = new Schema({
     nombretipotramite: {type: String, required: true,unique: true},
-    presentacion: {type: String, required: true},   
-    organogestor: {type: String, required: true}, 
-    recursos: {type: String},  
-    normativa: {type: String, required: true},
-    documentacion: {type: String, required: true}, 
     nombretramites: {type: [String], required: true}, 
 });
 
