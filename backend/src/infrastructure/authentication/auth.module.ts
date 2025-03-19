@@ -17,7 +17,7 @@ import { UsuarioRepository } from '../persistence/usuario.repository';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '86400s' }, //UN DIA 
     }),
   ],
   controllers: [AuthController],

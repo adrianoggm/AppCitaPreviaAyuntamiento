@@ -23,7 +23,7 @@ const config = ConfigModule.forRoot({
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'frontend','dist'), 
       
-      exclude: ['/api/(.*)'], //excluyo las rutas de api
+      exclude: ['/api/(.*)','/auth/(.*)'], //excluyo las rutas de api
     }),
     config,
     AuthModule,

@@ -3,7 +3,7 @@
 
 .sidebar {
   width: 150px;
-  background-color: #222831;
+  background-color: #103C54;
   color: #EEEEEE;
   height: 100vh;
   padding: 16px 8px;
@@ -21,7 +21,7 @@
     position: relative;
     
     &:hover {
-      background-color: #4D525A;
+      background-color: #134966;
       box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
     }
     
@@ -35,7 +35,7 @@
     }
     
     .dropdown {
-      background-color: #222831;
+      background-color: #103C54;
       border-radius: 4px;
       padding: 8px 0;
       margin-top: 4px;
@@ -49,8 +49,8 @@
         transition: background-color 0.3s ease;
         
         &:hover {
-          background-color: #00ADB5;
-          color: #222831;
+          background-color: #f2f4f3;
+          color: #103C54;
         }
       }
     }
