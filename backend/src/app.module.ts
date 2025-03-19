@@ -12,7 +12,7 @@ import { DepartamentoModule } from './infrastructure/adapters/controllers/depart
 import { CitaModule } from './infrastructure/adapters/controllers/cita/cita.module';
 import { TipoTramiteModule } from './infrastructure/adapters/controllers/tipotramite/tipotramite.module';
 import { TipoTramiteMetadatoModule } from './infrastructure/adapters/controllers/tipotramitemetadato/tipotramitemetadato.module';
-
+import {AuthModule} from './infrastructure/authentication/auth.module';
 const config = ConfigModule.forRoot({
   envFilePath: ['local.env', '.env'],
   isGlobal: true,
@@ -26,6 +26,7 @@ const config = ConfigModule.forRoot({
       exclude: ['/api/(.*)'], //excluyo las rutas de api
     }),
     config,
+    AuthModule,
     TramiteModule,
     UsuarioModule,
     TecnicoModule,
