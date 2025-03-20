@@ -5,8 +5,11 @@ import { Router } from '@angular/router';
 import { TramiteService } from '../../../core/services/tramite.service';
 import { TipotramiteMetadatoService } from '../../../core/services/tipotramitemetadato.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Observable,of } from 'rxjs';
+import { startWith, map,catchError } from 'rxjs/operators';
+import { UsuarioService } from '../../../core/services/usuario.service';
+
+
 
 @Component({
   selector: 'app-crear-tramite',
@@ -33,6 +36,7 @@ export class CrearTramiteComponent implements OnInit {
     private fb: FormBuilder,
     private tramiteService: TramiteService,
     private tipotramiteMetadatoService: TipotramiteMetadatoService,
+    private usuarioService: UsuarioService,
     private router: Router
   ) {}
 
@@ -117,9 +121,47 @@ export class CrearTramiteComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log('Formulario: Se manda correctamente ');
     if (this.createTramiteForm.valid) {
-      // El servicio completará los demás campos (idusuario, estado, código, observaciones, documentos, etc.)
-      this.tramiteService.createTramite(this.createTramiteForm.value).subscribe({
+      // Obtén la key seleccionada y el tipo trámite mapeado
+      const selectedKey = this.createTramiteForm.value.tipoTramite;
+      const tipoTramite = this.tramitesMap[selectedKey]; // Ej.: "Certificados"
+      console.log('Formulario: REVIENTA ?');
+      // Construye los demás campos
+      const nombre = `Trámite de ${tipoTramite}`;
+      const estado = 'pendiente';
+      const fechaInicio = new Date().toISOString();
+      const fechaFin = "";
+      const idusuario =this.obtenerIdUsuario().subscribe((idusuario) => {
+        console.log('Id del usuario:', idusuario);
+      }); 
+  
+      // Formateamos la fecha actual en formato YYYYMMDD
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().substring(0, 10).replace(/-/g, '');
+      // Genera un número aleatorio de 4 dígitos
+      const randomNumber = Math.floor(Math.random() * 9000 + 1000);
+      // Genera el código siguiendo el formato: TRAM + primeras 3 letras del tipo trámite + '-' + fecha formateada + '-' + '001' + random de 4 dígitos
+      const codigo = `TRAM${tipoTramite.substr(0, 3).toUpperCase()}-${formattedDate}-001${randomNumber}`;
+  
+      const observaciones = "";
+      const documentos: string[] = [];
+  
+      // Arma el objeto trámite
+      const tramite = {
+        nombre,
+        estado,
+        fechaInicio,
+        fechaFin,
+        idusuario,
+        codigo,
+        tipoTramite,
+        observaciones,
+        documentos
+      };
+  
+      // Envía el trámite al backend a través del servicio
+      this.tramiteService.createTramite(tramite).subscribe({
         next: (res) => {
           console.log('Trámite creado:', res);
           this.router.navigate(['/']); // Redirige tras la creación exitosa
@@ -129,5 +171,17 @@ export class CrearTramiteComponent implements OnInit {
         }
       });
     }
+  }
+  
+
+  obtenerIdUsuario(): Observable<string> {
+    const nombreusuario: string = localStorage.getItem('nombreusuario')!;
+    return this.usuarioService.getUsuariobyNombre(nombreusuario).pipe(
+    map((res) => res['idusuario'] || 'user123'),
+    catchError((err) => {
+      this.errorMessage = 'Error al obtener el id del usuario: ' + err.message;
+      return of('user123');
+    })
+  );
   }
 }
