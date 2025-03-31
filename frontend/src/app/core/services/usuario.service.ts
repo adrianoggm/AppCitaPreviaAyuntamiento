@@ -17,7 +17,7 @@ export class UsuarioService {
     return this.http.post<any>(this.apiUrl, tramite);
   }
   getUsuariobyNombre(nombre: string): Observable<{ [key: string]: string }> {
-    return this.http.get<{ [key: string]: string }>(`${environment.apiUrl}?nombreusuario=${nombre}`);
+    return this.http.get<{ [key: string]: string }>(`${this.apiUrl}?nombreusuario=${nombre}`);
   }
   
 }

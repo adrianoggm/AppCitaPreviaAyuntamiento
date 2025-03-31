@@ -121,67 +121,80 @@ export class CrearTramiteComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Formulario: Se manda correctamente ');
+    console.log('Formulario: Se manda correctamente');
     if (this.createTramiteForm.valid) {
       // Obtén la key seleccionada y el tipo trámite mapeado
       const selectedKey = this.createTramiteForm.value.tipoTramite;
       const tipoTramite = this.tramitesMap[selectedKey]; // Ej.: "Certificados"
-      console.log('Formulario: REVIENTA ?');
+      console.log('Formulario: Procesando trámite...');
+  
       // Construye los demás campos
       const nombre = `Trámite de ${tipoTramite}`;
       const estado = 'pendiente';
       const fechaInicio = new Date().toISOString();
       const fechaFin = "";
-      const idusuario =this.obtenerIdUsuario().subscribe((idusuario) => {
+      
+      // Primero obtén el idusuario de forma asíncrona
+      this.obtenerIdUsuario().subscribe((idusuario) => {
         console.log('Id del usuario:', idusuario);
-      }); 
   
-      // Formateamos la fecha actual en formato YYYYMMDD
-      const currentDate = new Date();
-      const formattedDate = currentDate.toISOString().substring(0, 10).replace(/-/g, '');
-      // Genera un número aleatorio de 4 dígitos
-      const randomNumber = Math.floor(Math.random() * 9000 + 1000);
-      // Genera el código siguiendo el formato: TRAM + primeras 3 letras del tipo trámite + '-' + fecha formateada + '-' + '001' + random de 4 dígitos
-      const codigo = `TRAM${tipoTramite.substr(0, 3).toUpperCase()}-${formattedDate}-001${randomNumber}`;
+        // Formateamos la fecha actual en formato YYYYMMDD
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().substring(0, 10).replace(/-/g, '');
+        // Genera un número aleatorio de 4 dígitos
+        const randomNumber = Math.floor(Math.random() * 9000 + 1000);
+        // Genera el código siguiendo el formato:
+        // TRAM + primeras 3 letras del tipo trámite (mayúsculas) + '-' + fecha formateada + '-' + '001' + random de 4 dígitos
+        const codigo = `TRAM${tipoTramite.substr(0, 3).toUpperCase()}-${formattedDate}-001${randomNumber}`;
   
-      const observaciones = "";
-      const documentos: string[] = [];
+        const observaciones = "";
+        const documentos: string[] = [];
   
-      // Arma el objeto trámite
-      const tramite = {
-        nombre,
-        estado,
-        fechaInicio,
-        fechaFin,
-        idusuario,
-        codigo,
-        tipoTramite,
-        observaciones,
-        documentos
-      };
+        // Arma el objeto trámite
+        const tramite = {
+          nombre,
+          estado,
+          fechaInicio,
+          fechaFin,
+          idusuario,
+          codigo,
+          tipoTramite,
+          observaciones,
+          documentos
+        };
   
-      // Envía el trámite al backend a través del servicio
-      this.tramiteService.createTramite(tramite).subscribe({
-        next: (res) => {
-          console.log('Trámite creado:', res);
-          this.router.navigate(['/']); // Redirige tras la creación exitosa
-        },
-        error: (err) => {
-          this.errorMessage = 'Error al crear el trámite: ' + err.message;
-        }
+        // Envía el trámite al backend a través del servicio
+        this.tramiteService.createTramite(tramite).subscribe({
+          next: (res) => {
+            console.log('Trámite creado:', res);
+            this.router.navigate(['/']); // Redirige tras la creación exitosa
+          },
+          error: (err) => {
+            this.errorMessage = 'Error al crear el trámite: ' + err.message;
+          }
+        });
       });
     }
   }
-  
 
   obtenerIdUsuario(): Observable<string> {
-    const nombreusuario: string = localStorage.getItem('nombreusuario')!;
+    // Recupera el nombre del usuario, si no existe se asigna una cadena vacía
+    const nombreusuario: string = localStorage.getItem('nombreusuario') || '';
+    console.log('Nombre usuario:', nombreusuario);
+    
+    // Si no se encontró el nombre en el localStorage, retorna un observable con valor por defecto
+    if (!nombreusuario) {
+      return of('null user');
+    }
     return this.usuarioService.getUsuariobyNombre(nombreusuario).pipe(
-    map((res) => res['idusuario'] || 'user123'),
-    catchError((err) => {
-      this.errorMessage = 'Error al obtener el id del usuario: ' + err.message;
-      return of('user123');
-    })
-  );
+      map((res) => {
+        console.log('Respuesta del servicio:', res);
+        return res['id'];
+      }),
+      catchError((err) => {
+        this.errorMessage = 'Error al obtener el id del usuario: ' + err.message;
+        return of('null user');
+      })
+    );
   }
 }
