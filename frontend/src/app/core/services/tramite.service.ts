@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class TramiteService {
-  private apiUrl = `${environment.apiUrl}/tramite`; // Ajusta la URL según tu backend
+  private apiUrl = `${environment.apiUrl}/tramites`; // Ajusta la URL según tu backend
 
   constructor(private http: HttpClient) {}
 

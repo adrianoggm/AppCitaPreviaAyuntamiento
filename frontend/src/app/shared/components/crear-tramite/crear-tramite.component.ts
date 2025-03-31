@@ -132,7 +132,8 @@ export class CrearTramiteComponent implements OnInit {
       const nombre = `Trámite de ${tipoTramite}`;
       const estado = 'pendiente';
       const fechaInicio = new Date().toISOString();
-      const fechaFin = "";
+      // Inicializamos fechaFin con un valor por defecto
+      const fechaFin = '0001-01-01T00:00:01.000Z';
       
       // Primero obtén el idusuario de forma asíncrona
       this.obtenerIdUsuario().subscribe((idusuario) => {
@@ -162,6 +163,7 @@ export class CrearTramiteComponent implements OnInit {
           observaciones,
           documentos
         };
+        console.log("tramite", tramite);
   
         // Envía el trámite al backend a través del servicio
         this.tramiteService.createTramite(tramite).subscribe({
@@ -176,6 +178,7 @@ export class CrearTramiteComponent implements OnInit {
       });
     }
   }
+  
 
   obtenerIdUsuario(): Observable<string> {
     // Recupera el nombre del usuario, si no existe se asigna una cadena vacía
