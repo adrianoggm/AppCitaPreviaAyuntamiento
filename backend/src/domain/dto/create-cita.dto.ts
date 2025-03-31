@@ -1,8 +1,4 @@
-import {
-    IsNotEmpty,
-    IsString,
-    IsOptional,
-} from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 /*
          Departamento 
             iddepartamento
@@ -13,32 +9,27 @@ import {
         //  Departamento  
 */
 
-
-export class CreateCitaDto{
-    /*@IsNotEmpty()
+export class CreateCitaDto {
+  /*@IsNotEmpty()
     @IsString()
     readonly id: string;*/
-    
-    @IsNotEmpty()
-    @IsString()
-    idtramite: string;
 
-    @IsOptional()
-    @IsString()
-    departamento : string;
+  @IsNotEmpty()
+  @IsString()
+  idtramite: string;
 
+  @IsOptional()
+  @IsString()
+  departamento: string;
 
-    @IsNotEmpty()
-    @IsString()
-    fechahora : string;
-    @IsOptional()
-    @IsString() 
-    idtecnico : string;
+  @IsNotEmpty()
+  @IsString()
+  fechahora: string;
+  @IsOptional()
+  @IsString()
+  idtecnico: string;
 
-    @IsOptional()
-    @IsString() 
-    localizacion : string;
-
-    
-
+  @IsOptional()
+  @IsString()
+  localizacion: string;
 }
