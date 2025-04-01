@@ -5,14 +5,14 @@ import { CreateTipoTramiteMetadatoUseCase  } from '../../../../application/use-c
 import { MongooseModule } from '@nestjs/mongoose';
 import { TipoTramiteMetadatoSchema } from '../../../../domain/schemas/tipotramitemetadato.schema';
 import { TipoTramiteMetadatoRepository  } from '../../../persistence/tipotramitemetadato.repository';
-
+import { BuscarTipoTramiteMetadatoUseCase } from "src/application/use-cases/buscar-tipotramitemetadato.use-case";
 //TODO falta por añadir la funcionalidad del  Repositorio
 @Module({
     imports: [
       MongooseModule.forFeature([{ name:'TipoTramiteMetadato',schema: TipoTramiteMetadatoSchema }]),
     ],
     controllers: [TipoTramiteMetadatoController],
-    providers: [CreateTipoTramiteMetadatoUseCase ,
+    providers: [CreateTipoTramiteMetadatoUseCase ,BuscarTipoTramiteMetadatoUseCase,
       {
         provide: 'ITipoTramiteMetadatoRepository',
         useClass: TipoTramiteMetadatoRepository,

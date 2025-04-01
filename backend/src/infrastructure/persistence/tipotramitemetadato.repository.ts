@@ -13,4 +13,8 @@ export class TipoTramiteMetadatoRepository implements ITipoTramiteMetadatoReposi
     const createdTipoTramiteMetadato = new this.tramiteModel(tramite);
     return createdTipoTramiteMetadato.save();
   }
+   async findTipoTramiteMetadatoByName(nombre: string): Promise<TipoTramiteMetadato | null> {
+    const tipotramitemetadatoDoc = await this.tramiteModel.findOne({ nombre }).exec();
+     return tipotramitemetadatoDoc ? tipotramitemetadatoDoc.toJSON() : null;
+}
 }

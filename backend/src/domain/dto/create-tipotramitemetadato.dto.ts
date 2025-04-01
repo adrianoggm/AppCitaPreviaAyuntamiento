@@ -10,37 +10,31 @@
 
 */
 
-//aqui compruebo  si cumplen el tipo de dato que se espera y regla negocio que se espera 
-import {
-    IsNotEmpty,
-    IsString,
+//aqui compruebo  si cumplen el tipo de dato que se espera y regla negocio que se espera
+import { IsNotEmpty, IsString } from 'class-validator';
 
-} from 'class-validator';
+export class CreateTipoTramiteMetadatoDto {
+  @IsNotEmpty()
+  @IsString()
+  readonly nombre: string;
 
-export class CreateTipoTramiteMetadatoDto { 
-    @IsNotEmpty()
-    @IsString()
-    readonly nombre: string;
+  @IsNotEmpty()
+  @IsString()
+  readonly presentacion: string;
 
-    @IsNotEmpty()
-    @IsString()
-    readonly presentacion: string;
+  @IsNotEmpty()
+  @IsString()
+  readonly organogestor: string;
 
-    @IsNotEmpty()
-    @IsString()
-    readonly organogestor: string;
+  @IsNotEmpty()
+  @IsString()
+  readonly recursos: string;
 
-    @IsNotEmpty()
-    @IsString()
-    readonly recursos: string;
+  @IsNotEmpty()
+  @IsString()
+  readonly normativa: string;
 
-    @IsNotEmpty()
-    @IsString()
-    readonly normativa: string;
-
-    @IsNotEmpty()
-    @IsString()
-    readonly documentacion: string;
-    
-
+  @IsNotEmpty()
+  @IsString()
+  readonly documentacion: string;
 }

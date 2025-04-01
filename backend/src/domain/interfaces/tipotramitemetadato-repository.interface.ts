@@ -4,5 +4,5 @@ import {TipoTramiteMetadato} from "../entities/tipotramitemetadato.entity";
 export interface ITipoTramiteMetadatoRepository {
 
     CreateTipoTramiteMetadato(tramite: CreateTipoTramiteMetadatoDto): Promise<TipoTramiteMetadato>;
-
+    findTipoTramiteMetadatoByName(nombre: string): Promise<TipoTramiteMetadato | null>;
 }

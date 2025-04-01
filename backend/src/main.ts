@@ -7,7 +7,8 @@ async function bootstrap() {
   
   // Habilita CORS permitiendo solo el origen de Angular
   app.enableCors({
-    origin: 'http://localhost:4200',
+    origin: process.env.FRONTEND_URL,// par
+    
   });
   
   app.useGlobalPipes(

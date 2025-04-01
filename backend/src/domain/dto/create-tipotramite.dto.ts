@@ -10,21 +10,15 @@
 
 */
 
-//aqui compruebo  si cumplen el tipo de dato que se espera y regla negocio que se espera 
-import {
-    IsNotEmpty,
-    IsString,
+//aqui compruebo  si cumplen el tipo de dato que se espera y regla negocio que se espera
+import { IsNotEmpty, IsString } from 'class-validator';
 
-} from 'class-validator';
+export class CreateTipoTramiteDto {
+  @IsNotEmpty()
+  @IsString()
+  readonly nombretipotramite: string;
 
-export class CreateTipoTramiteDto { 
-    @IsNotEmpty()
-    @IsString()
-    readonly nombretipotramite: string;
-
-    @IsNotEmpty()
-    @IsString({each: true})
-    readonly nombretramites: string[];
-    
-
+  @IsNotEmpty()
+  @IsString({ each: true })
+  readonly nombretramites: string[];
 }

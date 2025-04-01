@@ -1,7 +1,4 @@
-import {
-    IsNotEmpty,
-    IsString,
-} from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 /*
         Tecnico:   
@@ -17,47 +14,44 @@ import {
         certificado     //se genera y se cifra // es el certificado de firma que tiene esta persona solo será modificable por superadmin
 */
 
-
-export class CreateTecnicoDto{
-    /*@IsNotEmpty()
+export class CreateTecnicoDto {
+  /*@IsNotEmpty()
     @IsString()
     readonly id: string;*/
-    
-    @IsNotEmpty()
-    @IsString()
-    nombretecnico: string;
 
-    @IsNotEmpty()
-    @IsString()
-    nombre : string;
+  @IsNotEmpty()
+  @IsString()
+  nombretecnico: string;
 
-    @IsNotEmpty()
-    @IsString()
-    apellidos : string;
+  @IsNotEmpty()
+  @IsString()
+  nombre: string;
 
-    @IsNotEmpty()
-    @IsString()
-    idtrabajador : string;
-    
-    @IsNotEmpty()
-    @IsString()
-    contrasena : string;
+  @IsNotEmpty()
+  @IsString()
+  apellidos: string;
 
-    @IsNotEmpty()
-    @IsString()
-    correo : string;
-    
-    @IsNotEmpty()
-    @IsString()
-    telefono : string;
+  @IsNotEmpty()
+  @IsString()
+  idtrabajador: string;
 
-    @IsNotEmpty()
-    @IsString()
-    departamento:string;
-    
-    @IsNotEmpty()
-    @IsString()
-    localizacion:string;
-    
+  @IsNotEmpty()
+  @IsString()
+  contrasena: string;
+
+  @IsNotEmpty()
+  @IsString()
+  correo: string;
+
+  @IsNotEmpty()
+  @IsString()
+  telefono: string;
+
+  @IsNotEmpty()
+  @IsString()
+  departamento: string;
+
+  @IsNotEmpty()
+  @IsString()
+  localizacion: string;
 }
-

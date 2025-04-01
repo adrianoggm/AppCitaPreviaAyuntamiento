@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
           // Guarda el token (por ejemplo, en localStorage)
           localStorage.setItem('token', res.token);
           // Redirige a la página principal u otra ruta protegida
+          localStorage.setItem('nombreusuario', this.loginForm.value.nombreusuario);
           this.router.navigate(['/']);
         },
         error: (err) => {

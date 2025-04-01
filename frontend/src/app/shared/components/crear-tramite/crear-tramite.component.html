@@ -1,27 +1,40 @@
-<!-- src/app/features/crear-tramite/crear-tramite.component.html -->
 <div class="crear-tramite-container">
-  <h2>Crear Trámite</h2>
-  <p class="subtext">Selecciona el tipo de trámite que deseas crear.</p>
   <form [formGroup]="createTramiteForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="tipoTramite">Tipo de Trámite</label>
-      <input id="tipoTramite"
-             formControlName="tipoTramite"
-             type="text"
-             placeholder="Ej. CERTIFICADO"
-             (focus)="onFocus()"
-             (blur)="onBlur()" />
-      <!-- Lista de sugerencias: solo se muestra si el input está enfocado y hay sugerencias -->
-      <ul *ngIf="isInputFocused && filteredTramites.length > 0" class="autocomplete-list">
-        <li *ngFor="let tramite of filteredTramites" 
-            (mousedown)="createTramiteForm.get('tipoTramite')?.setValue(tramite)">
-          {{ tramite }}
-        </li>
-      </ul>
+    <!-- Sección de búsqueda del tipo trámite metadato -->
+    <div class="buscar-container">
+      <label for="tipoTramite">Buscar tipo trámite:</label>
+      <input
+        id="tipoTramite"
+        type="text"
+        formControlName="tipoTramite"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        placeholder="Ingrese el nombre del trámite..."
+      />
+      <button type="button" (click)="onSelectTramite(createTramiteForm.get('tipoTramite')?.value)">
+        Buscar
+      </button>
     </div>
-    <div *ngIf="errorMessage" class="error">
-      {{ errorMessage }}
+
+    <!-- Lista de sugerencias -->
+    <ul *ngIf="isInputFocused && filteredTramites.length">
+      <li *ngFor="let tramite of filteredTramites" (click)="onSelectTramite(tramite)">
+        {{ tramite }}
+      </li>
+    </ul>
+
+    <!-- Sección para mostrar la plantilla en formato "hoja de presentación" -->
+    <div class="template-container" *ngIf="selectedTemplate">
+      <h3>Plantilla del Trámite</h3>
+      <div class="report-container">
+        <h2>{{ selectedTemplate.nombre }}</h2>
+        <p><strong>Presentación:</strong> {{ selectedTemplate.presentacion }}</p>
+        <p><strong>Órgano Gestor:</strong> {{ selectedTemplate.organogestor }}</p>
+        <p><strong>Recursos:</strong> {{ selectedTemplate.recursos }}</p>
+        <p><strong>Normativa:</strong> {{ selectedTemplate.normativa }}</p>
+        <p><strong>Documentación Necesaria:</strong> {{ selectedTemplate.documentacion }}</p>
+      </div>
+      <button type="submit">Crear Trámite</button>
     </div>
-    <button type="submit" [disabled]="createTramiteForm.invalid">Crear Trámite</button>
   </form>
 </div>

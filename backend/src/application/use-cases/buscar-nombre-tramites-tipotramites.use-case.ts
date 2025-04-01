@@ -1,13 +1,12 @@
-
 import { Injectable, Inject } from '@nestjs/common';
 import { ITipoTramiteRepository } from '../../domain/interfaces/tipotramite-repository.interface';
-import { TipoTramite} from '../../domain/entities/tipotramite.entity'
+import { TipoTramite } from '../../domain/entities/tipotramite.entity';
 
 @Injectable()
 export class GetNombreTramitesTipoTramitesUseCase {
   constructor(
     @Inject('ITipoTramiteRepository')
-    private readonly tipoTramiteRepository: ITipoTramiteRepository,
+    private readonly tipoTramiteRepository: ITipoTramiteRepository
   ) {}
 
   /**
@@ -18,16 +17,18 @@ export class GetNombreTramitesTipoTramitesUseCase {
    */
   async execute(): Promise<{ [nombreTramite: string]: string }> {
     // Se obtienen todos los registros de TipoTramite desde la base de datos
-    const tipoTramites: TipoTramite[] = await this.tipoTramiteRepository.findAll();
+    const tipoTramites: TipoTramite[] =
+      await this.tipoTramiteRepository.findAll();
     //nombretramites nombretipotramite
     // Se construye el mapa iterando cada registro y sus nombres asociados
+    console.log('tipoTramites', tipoTramites);
     const map: { [nombreTramite: string]: string } = {};
-    tipoTramites.forEach(tipo => {
-      tipo.nombretramites.forEach(nombre => {
+    tipoTramites.forEach((tipo) => {
+      tipo.nombretramites.forEach((nombre) => {
         map[nombre] = tipo.nombretipotramite;
       });
     });
-
+    console.log('MAP', map);
     return map;
   }
 }

@@ -1,7 +1,4 @@
-import {
-    IsNotEmpty,
-    IsString,
-} from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 /*
         Usuario:   
@@ -16,35 +13,32 @@ import {
         telefono
 */
 
-export class CreateUsuarioDto{
+export class CreateUsuarioDto {
+  @IsNotEmpty()
+  @IsString()
+  nombreusuario: string;
 
-    
-    @IsNotEmpty()
-    @IsString()
-    nombreusuario: string;
+  @IsNotEmpty()
+  @IsString()
+  nombre: string;
 
-    @IsNotEmpty()
-    @IsString()
-    nombre : string;
+  @IsNotEmpty()
+  @IsString()
+  apellidos: string;
 
-    @IsNotEmpty()
-    @IsString()
-    apellidos : string;
+  @IsNotEmpty()
+  @IsString()
+  dnipas: string;
 
-    @IsNotEmpty()
-    @IsString()
-    dnipas : string;
-    
-    @IsNotEmpty()
-    @IsString()
-    contrasena : string;
+  @IsNotEmpty()
+  @IsString()
+  contrasena: string;
 
-    @IsNotEmpty()
-    @IsString()
-    correo : string;
-    
-    @IsNotEmpty()
-    @IsString()
-    telefono : string;
+  @IsNotEmpty()
+  @IsString()
+  correo: string;
+
+  @IsNotEmpty()
+  @IsString()
+  telefono: string;
 }
-

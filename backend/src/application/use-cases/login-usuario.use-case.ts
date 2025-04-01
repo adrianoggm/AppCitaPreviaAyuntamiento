@@ -10,7 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 export class LoginUsuarioUseCase {
   constructor(
     @InjectModel('Usuario') private readonly usuarioModel: Model<Usuario>,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   async execute(loginUsuarioDto: LoginUsuarioDto): Promise<{ token: string }> {
@@ -33,7 +33,7 @@ export class LoginUsuarioUseCase {
 
     // Generar el token JWT
     const token = this.jwtService.sign(payload);
-    console.log(token)
+    console.log(token);
     return { token };
   }
 }

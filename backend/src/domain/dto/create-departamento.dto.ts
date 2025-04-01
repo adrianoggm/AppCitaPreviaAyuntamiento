@@ -1,8 +1,4 @@
-import {
-    IsNotEmpty,
-    IsString,
-    IsOptional,
-} from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 /*
          Departamento 
             iddepartamento
@@ -13,22 +9,20 @@ import {
         //  Departamento  
 */
 
-
-export class CreateDepartamentoDto{
-    /*@IsNotEmpty()
+export class CreateDepartamentoDto {
+  /*@IsNotEmpty()
     @IsString()
     readonly id: string;*/
-    
-    @IsNotEmpty()
-    @IsString()
-    nombre: string;
 
-    @IsNotEmpty()
-    @IsString()
-    codigo : string;
+  @IsNotEmpty()
+  @IsString()
+  nombre: string;
 
-    @IsOptional()
-    @IsString({each: true}) //buscar como hacer que cada uno sea un string
-    TipoTramites : string[];
+  @IsNotEmpty()
+  @IsString()
+  codigo: string;
 
+  @IsOptional()
+  @IsString({ each: true }) //buscar como hacer que cada uno sea un string
+  TipoTramites: string[];
 }
